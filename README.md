@@ -9,7 +9,7 @@
 
 1-Subdomains [ "Sublist3r" , "Subfinder" , "Subbrute" , "Amass" , "AssetFinder" , "Gobuster" ,"Crt.sh" , "SecurityTrails"]
 
-2-Live Subdomains on different ports [80,8080,8888,443,8443,9443,3000,10000]
+2-Live Subdomains on different ports [80,8080,8888,443,8443,9443,3000,10000]  & Test Subdomains TakeOver
 
 3-Get Package.json file [ Dependency Confusion ]
 
