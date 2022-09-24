@@ -21,9 +21,11 @@
  
  ```
  cd MyRecon
- 
+ ```
+ ```
  chmod +x recon.sh
- 
+ ```
+ ```
  ./recon.sh domain.com wordlist.txt
 ```
 
