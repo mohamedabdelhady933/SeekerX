@@ -1,0 +1,23 @@
+id: CNVD-2019-32204
+
+info:
+  name: 泛微OA Bsh 远程代码执行漏洞
+  author: str1am
+  severity: critical
+  tags: fanwei
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/weaver/bsh.servlet.BshServlet/"
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "BeanShell Test Servlet"
+          - "Script"
+        part: body
+        condition: and

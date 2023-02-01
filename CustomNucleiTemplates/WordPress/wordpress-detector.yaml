@@ -1,0 +1,15 @@
+id: wp-detected
+
+info:
+	name: WordPress Detector
+	author: Mohamed Abdelhady
+	severity: info
+
+requests:
+	- method: GET
+	  path:
+		- {{BaseURL}}/license.txt'
+	  matchers:
+		- type: word
+		  words:
+			- "wordpress"

@@ -1,0 +1,24 @@
+--- 
+id: CORS-arbitrary-subdomain-ACAC
+info: 
+  author: "Mohamed Abdelhady"
+  description: "Check for arbitrary subdomains accesible with CORS"
+  name: "CORS Misconfiguration allowing for arbitrary to use ACAC"
+  severity: low
+  tags: cors
+requests: 
+  - 
+    headers: 
+      Accept: ../../../../../../../../../../../../etc/passwd
+      Orign: "https://mohamedabdelhady.{{Hostname}}"
+    matchers: 
+      - 
+        condition: and
+        type: word
+        words: 
+          - "Access-Control-Allow-Origin:"
+          - "Access-Control-Allow-Credentials: true"
+          - "https://mohamedabdelhady"
+    method: GET
+    path: 
+      - "{{BaseURL}}/"
