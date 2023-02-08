@@ -136,8 +136,14 @@ then
                 printf "${GREEN}[+]  Enum more subdomains of Subdomains \n\n";
 
                 touch Recon/$1/subs_of_subs.txt;
+                touch Recon/$1/filter_subs.txt;
                 subfinder -dL Recon/$1/tmp_for_subs.txt -silent >>  Recon/$1/subs_of_subs.txt;
                 cat Recon/$1/subs_of_subs.txt >> Recon/$1/tmp_for_subs.txt;
+                rm Recon/$1/subs_of_subs.txt;
+                cat Recon/$1/tmp_for_subs.txt | sort -u >> Recon/$1/filter_subs.txt;
+                rm Recon/$1/tmp_for_subs.txt;
+                cat Recon/$1/filter_subs.txt >> Recon/$1/tmp_for_subs.txt;
+                
                 
         else
                 printf "${RED}[-]----------Subfinder tool Not Found----------[-]\n\n";
