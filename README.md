@@ -9,17 +9,30 @@
 
 1-Subdomains [ "Sublist3r" , "Subfinder" , "Subbrute" , "Amass" , "AssetFinder" , "Gobuster" ,"Crt.sh" , "SecurityTrails"]
 
-2-Live Subdomains on different ports [80,8080,8888,443,8443,9443,3000,10000]  & Test Subdomains TakeOver
+2-Get Subdomains of subdomains
 
-3-Get Package.json file [ Dependency Confusion ]
+3-Live Subdomains on different ports [80,443,8080,8443,9443,9080,8888,3000,81,30001,9000,10000,2222]  & Test Subdomains TakeOver
 
-4-IPs & IP Range
+4-Get URLs 
 
-5-ASN Numbers
+5-Get Package.json file for check [ Dependency Confusion ]
 
-6-JS Files
+6-Check Dependency Confusion
 
-7-Get Parameters then test SSRF and XSS payload
+7-Collect JS Files
+
+8-IPs & IP Range  (Optional)
+
+9-ASN Numbers   (Optional)
+
+10-Get Parameters then test SSRF and XSS payload
+
+11-Tring some XSS
+
+12-Scan & Footprinting & Discovering the target using Nuclei with some nuclei custom templates
+
+13-Get Some relevant IPs from shodan and scan them
+
 
 # Gitmind 
 
