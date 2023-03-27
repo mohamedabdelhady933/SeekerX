@@ -158,7 +158,7 @@ then
         if [  -x "$(command -v subzy)" ]
         then
 
-                subzy --hide_fails -targets Recon/$1/tmp_for_subs.txt;
+                subzy run --hide_fails --targets Recon/$1/tmp_for_subs.txt;
                 printf "\n\n";
                 
         else
