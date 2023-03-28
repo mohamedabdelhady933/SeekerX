@@ -202,7 +202,7 @@ then
         if [ -x "$(command -v httpx)" ]
         then
         printf "${GREEN}[+]  Try to find package.json \n\n";
-        cat Recon/$1/live-subs.txt | httpx -silent -path /package.json >> Recon/$1/dependency_paths.txt;
+        cat Recon/$1/live-subs.txt | httpx -silent -path /package.json -mc 200 >> Recon/$1/dependency_paths.txt;
         else
                 printf "${RED}[-]----------httpx tool Not Found----------[-]\n\n";
                 printf "\n${WHITE} You can Download it  [ go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest ]\n\n";
