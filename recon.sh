@@ -245,7 +245,7 @@ then
                 subsforjs=$(cat Recon/$1/live-subs.txt);
                 for i in $subsforjs
                 do
-                echo $i | gau | grep "\.js$" >> Recon/$1/js_files;
+                echo $i | gau | grep "\.js$" | httpx -silent -mc 200 >> Recon/$1/js_files;
                 done
         else
                 printf "${RED}[-]----------Gau Tool Not Found----------[-]\n\n";
