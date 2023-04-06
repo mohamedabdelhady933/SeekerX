@@ -53,6 +53,6 @@
  chmod +x recon.sh
  ```
  ```
- ./recon.sh domain.com wordlist.txt
+ ./recon.sh domain.com subdomains-wordlist.txt
 ```
 
