@@ -263,13 +263,15 @@ function endpointsScan {
   if [ -x "$(command -v waybackurls)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.waybackurls ]
   then
     echo -e "${GREEN}[+] gau Started on $1${NC}"
-    cat $outputdir/$projectname/$1/recon/subdomains/all_subs.txt | waybackurls > $outputdir/$projectname/$1/recon/endpoints/waybackurls.txt
+    cat $outputdir/$projectname/$1/recon/subdomains/* | sort -u | waybackurls > $outputdir/$projectname/$1/recon/endpoints/waybackurls.txt
     touch $outputdir/$projectname/$1/.progress/.waybackurls
   fi 
 
   cat $outputdir/$projectname/$1/recon/endpoints/* | cut -f3 -d / | sort -u > $outputdir/$projectname/$1/recon/subdomains/endpoints_subs.txt
 
-  
+}
+
+function endpointsFuzzing {
   #------------------------------------------ Dirsearch ----------------------------------------------#
   
   if [ -x "$(command -v dirsearch)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.dirsearch ]
@@ -356,35 +358,19 @@ function checkForVulns {
     mkdir $outputdir/$projectname/$1/recon/wordpress
     cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "wordpress-detect" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt  
     
-
-
-
-
 #----------------------------------- Scan Wordpress -----------------------------------------------#
 
   if [ -f $SEEKERX_HOME/tools/wpconfig-checker.py ] && [ -x "$(command -v wpscan)" ] && [ -x "$(command -v python)" ] && [-f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt ]
   then
-    # wordpress_subs=$(cat $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt)
-    # for i in $wordpress_subs
-    # do
-    #    len=`expr length "$i"`
-    #   if [ "/" == ${i:$len-1:$len} ]
-    #   then
-        python3 $SEEKERX_HOME/tools/wpconfig-checker.py -f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt 
-      # else
-      #  python3 $SEEKERX_HOME/tools/wpconfig-checker.py $i"/"
-      # fi
-      
-    done
-  
-
-
+    python3 $SEEKERX_HOME/tools/wpconfig-checker.py -f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt 
+  fi
 }
 function scan {
   echo -e "${BLUE}${BOLD}[+] Scanning domain: ${GREEN}$1${NC}"
   # SubDomains Finding 
   mkdir -p $outputdir/$projectname/$1/.progress
   subdomainsScan $1
+  endpointsFuzzing $1
   subdomainTakeoverScan $1
   checkForVulns $1 
    
