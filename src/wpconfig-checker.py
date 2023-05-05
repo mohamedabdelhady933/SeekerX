@@ -55,7 +55,7 @@ def check_wordpress(url, api_key=None):
     print(Fore.GREEN, "\n [+] Starting check registration enabled")
     res = requests.get(url + "/wp-register.php", allow_redirects=False)
     if ("User registration is currently not allowed" in res.text) or (res.status_code == 302) or (res.status_code == 404) or (res.status_code == 301) or (res.status_code != 200):
-        print(Fore.RED, "\n [-] Registration Not enable")
+        print(Fore.RED, "\n [-] Registration Not Enabled")
     else:
         print(Fore.GREEN, "\n [+] Registration Enabled")
 
