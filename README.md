@@ -4,7 +4,7 @@
 
 
 <p align="center">
-  <a href="https://github.com/mohamedabdelhady933/MyRecon/releases/tag/v2.6">
+  <a href="https://github.com/mohamedabdelhady933/MyRecon/releases/tag/v1.0">
     <img src="https://img.shields.io/badge/release-v2.6-green">
   </a>
    </a>
