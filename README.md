@@ -9,13 +9,16 @@
 <a href="https://github.com/mohamedabdelhady933/SeekerX/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
 <img src="https://img.shields.io/badge/BashScript-blue">
 </p>
+
 <p align="center">
   <a href="#installation">Installation</a> |
   <a href="#configuration">Configuration</a> |
   <a href="#usage">Usage</a> |
   <a href="#example-usage">Example Usage</a> 
 </p>
+
 <!----------------------------------------------------------About------------------------------------------------------------------>
+
 # What SeekerX do
 
 <p align=""> 1- Get Subdomains and Subs of Subdomains</p>
