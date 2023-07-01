@@ -2,13 +2,39 @@
   <img src="" alt="SeekerX" width="200px" style="background:linear-gradient(to right, #34e89e, #0f3443);color:black">
   <br>
 </h1>
- <p align="center"> Seekerx is a command-line tool that facilitates scanning of domain names for specified projects. It can be used to identify potential subdomains and gather information about them.. </p>
+
 
 <p align="center">
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-_red.svg"></a>
 <a href="https://github.com/mohamedabdelhady933/SeekerX/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
 <img src="https://img.shields.io/badge/BashScript-blue">
 </p>
+
+ <p align=""> Seekerx is a command-line tool that facilitates scanning of domain names for specified projects. It can be used to identify potential subdomains and gather information about them.. </p>
+<p align=""> 1- Get Subdomains and Subs of Subdomains</p>
+<p align=""> 2- Filter Live subdomains (may get admin panels) </p>
+<p align=""> 3- Check Subdomain Takeover </p>
+<p align=""> 4- Collect all URLs </p>
+<p align=""> 5- Collect all endpoints </p>
+<p align=""> 6- Collect all Javascript files </p>
+<p align=""> 7- Collect all Parameters </p>
+<p align=""> 8- Collect all wordpress subdomains </p>
+<p align=""> 9- Collect all wordpress subdomains </p>
+<p align=""> 10- Collect all package.json file to check Dependency confusion </p>
+<p align=""> 11- Collect all Shodan IPs and Scan them </p>
+<p align=""> 12- Collect other CMS (drupal , Joomla ,AEM) subdomains</p>
+<p align=""> 13- Collect all Cpanel subdomains </p>
+<p align=""> 14- Collect all Collect Jira subdomains </p>
+<p align=""> 15- Collect all Grafana Subdomains</p>
+<p align=""> 16- Scan For XSS </p>
+<p align=""> 17- Scan Dependency confusion </p>
+<p align=""> 18- Run Nuclei with Custom Nuclei Templates </p>
+<p align=""> 19- Scan all wordpress subdomains using wpscan and custom wordpress scanner tool </p>
+<p align=""> 20- Scan other CMS (drupal , Joomla ,AEM) subdomains </p>
+<p align=""> 21- Scan JS files </p>
+<p align=""> 22- Filter possible SSRF parameters </p>
+<p align=""> 23- Google dorking </p>
+<p align=""> 24- Github dorking </p>
 
 <!------------------------------------------------------------------Installation---------------------------------------------------->
 <p align="center">
