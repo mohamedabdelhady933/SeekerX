@@ -2,7 +2,7 @@
   <img src="" alt="SeekerX" width="200px" style="background:linear-gradient(to right, #34e89e, #0f3443);color:black">
   <br>
 </h1>
- <p align=""> Seekerx is a command-line tool that facilitates scanning of domain names for specified projects. It can be used to identify potential subdomains and gather information about them.. </p>
+ <p align="center"> Seekerx is a command-line tool that facilitates scanning of domain names for specified projects. It can be used to identify potential subdomains and gather information about them.. </p>
 
 <p align="center">
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-_red.svg"></a>
