@@ -16,7 +16,7 @@ function banner  {
          "Y88888P"    `"Ybbd8"'   `"Ybbd8"'  88   `Y8a  `"Ybbd8"'  88      8P        Y8 
 
 EOF
-  echo -e "                                         ${GREEN} SeekerX -  Reconnaissance tool by 0x41ly${NC}"
+  echo -e "${GREEN} SeekerX -  Reconnaissance & Scanning tool by ALi(0x41ly) & Mohamed Abdelhady${NC}"
   echo ""
 }
 
@@ -33,7 +33,7 @@ function usage {
 }
 
 function checkForTools {
-  if ! [ -x "$(command -v $HOOK_HOME/hoOk.py)" ]
+  if ! [ -f $HOOK_HOME/hoOk.py ]
   then
     echo -e "${RED}[-]---------- hoOk not found ----------[-]${NC}"
     echo -e "${RED}[-] Download it from https://github.com/mrxdevil404/hoOk.git${NC}"
@@ -101,7 +101,7 @@ function checkForTools {
       echo -e "${RED}[-] Download it with 'go install github.com/projectdiscovery/httpx/cmd/httpx@latest'${NC}"
     fi
 
-  if ! [ -x "$(command -v $SEEKERX_HOME/tools/DepFine/DepFine.py)" ]
+  if ! [ -f $SEEKERX_HOME/tools/DepFine/DepFine.py ]
     then 
       echo -e "${RED}[-]---------- DepFine not found ----------[-]${NC}"
       echo -e "${RED}[-] Download it with 'git clone https://github.com/M359AH/DepFine.git '${NC}"
@@ -138,17 +138,55 @@ function checkForTools {
       echo -e "${RED}[-] Download it by 'wget https://raw.githubusercontent.com/mohamedabdelhady933/Wordpress-Config-Enum/main/wpconfig-checker.py'${NC}"
       echo -e "${RED}[-] Place it in the tools folder"
     fi
+
+    if ! [ -x "$(command -v wpscan)" ]
+    then
+      echo -e "${RED}[-]---------- wpscan not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it by 'gem install wpscan'${NC}"
+    fi
     
+    if ! [ -x "$(command -v gospider)" ]
+    then
+      echo -e "${RED}[-]---------- gospider not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it by 'go install -v github.com/jaeles-project/gospider@latest'${NC}"
+    fi
+
+    if ! [ -x "$(command -v kxss)" ]
+    then
+      echo -e "${RED}[-]---------- kxss not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it by 'go install -v github.com/Emoe/kxss@latest'${NC}"
+    fi
+    
+    if ! [ -x "$(command -v gf)" ]
+    then
+      echo -e "${RED}[-]---------- gf not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it by 'go get -u github.com/tomnomnom/gf'${NC}"
+    fi
+
+    if ! [ ! "$AXIOM" = true   ]
+    then
+      echo -e "${RED}[-]---------- axion not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it by 'bash <(curl -s https://raw.githubusercontent.com/pry0cc/axiom/master/interact/axiom-configure)${NC}"
+    fi
+
+    if [ -x "$(command -v gitdorks_go)" ] 
+    then
+      echo -e "${RED}[-]---------- gitdorks_go not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it from 'https://github.com/damit5/gitdorks_go' and place it in the tools dir and build it${NC}"
+    fi 
   echo -e "${GREEN}[+] Done!!"
+
+  
+  
 }
 
 function subdomainsScan {
-
+  echo -e "${YELLOW}[+] The Project saved in $outputdir/$projectname/$1 \n"
   mkdir -p $outputdir/$projectname/$1/recon/subdomains
   echo -e "${YELLOW}[+] Passive subdomains scanning for $1${NC}"
 
   #------------------------------------------ hoOk ----------------------------------------------#
-  if [ -x "$(command -v $HOOK_HOME/hoOk.py)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.hook ]
+  if [ -f $HOOK_HOME/hoOk.py ] && ! [ -f $outputdir/$projectname/$1/.progress/.hook ]
   then
     echo -e "${GREEN}[+] hoOk Started on $1${NC}"
     currentplace="$(pwd)"
@@ -162,6 +200,7 @@ function subdomainsScan {
 
 
   #------------------------------------------- sublist3r --------------------------------------------------#
+  
   if [ -x "$(command -v sublist3r)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.sublist3r ]
   then
     echo -e "${GREEN}[+] sublist3r Started on $1${NC}"
@@ -223,6 +262,15 @@ function subdomainsScan {
   echo -e "${GREEN}[+] Found $(wc -l $outputdir/$projectname/$1/recon/subdomains/all_subs.txt | cut -f 1 -d " " ) subdomains for $1 ${NC}"
   echo -e "${GREEN}[+] All subdomains can be found in $outputdir/$projectname/$1/recon/subdomains/all_subs.txt"
 
+   #------------------------------------------- s3 scan --------------------------------------------------#
+    
+  if [ "$AXIOM" = true ] && ! [ -f $outputdir/$projectname/$1/.progress/.axiom-s3 ];
+    then
+    echo -e "${GREEN}[+] s3bucket scan Started on $1${NC}"
+    mkdir $outputdir/$projectname/$1/recon/s3buckets
+    axiom-scan $outputdir/$projectname/$1/recon/subdomains/all_subs.txt -m s3scanner -o $outputdir/$projectname/$1/recon/s3buckets/axiom.txt
+    touch $outputdir/$projectname/$1/.progress/.axiom-s3
+  fi
   #------------------------------------------- httpx --------------------------------------------------#
   
   if [ -x "$(command -v httpx)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.httpx ]
@@ -255,7 +303,7 @@ function endpointsScan {
   if [ -x "$(command -v gau)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.gau ]
   then
     echo -e "${GREEN}[+] gau Started on $1${NC}"
-    cat $outputdir/$projectname/$1/recon/subdomains/all_subs.txt | gau --providers gau,otx,urlscan --subs | sort -u > $outputdir/$projectname/$1/recon/endpoints/gau.txt
+    cat $outputdir/$projectname/$1/recon/subdomains/* | sort -u | gau --providers gau,otx,urlscan --subs | sort -u > $outputdir/$projectname/$1/recon/endpoints/gau.txt
     touch $outputdir/$projectname/$1/.progress/.gau
   fi
 
@@ -288,7 +336,40 @@ function endpointsFuzzing {
     cat $outputdir/$projectname/$1/recon/endpoints/dirsearch.txt | cut -d " " -f16 | sort -u >>  $outputdir/$projectname/$1/recon/endpoints/dirsearch_endpoints.txt
     touch $outputdir/$projectname/$1/.progress/.dirsearch
   fi
+
+#------------------------------------------ js collect ----------------------------------------------#
+    echo -e "${GREEN}[+] Start Collect Javascript files${NC}"
+    mkdir -p $outputdir/$projectname/$1/recon/endpoints/js
+    cat $outputdir/$projectname/$1/recon/endpoints/* | grep "\.js$"| cut -d '?' -f 1 >> $outputdir/$projectname/$1/recon/endpoints/js/endpoints_js.txt
+    
+    if [ -x "$(command -v gospider)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.gospider ]
+    then       
+      gospider -s https://$1 | grep $1 | grep "\.js$" | cut -d '?' -f 1 | awk -F"http" '{print "http"$2}' >> $outputdir/$projectname/$1/recon/endpoints/js/gospider.txt
+      
+      touch $outputdir/$projectname/$1/.progress/.gospider
+    fi
+
+  cat $outputdir/$projectname/$1/recon/endpoints/js/* | sort -u | httpx -silent -mc 200  >> $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt
+
+  #------------------------------------------ JS leaks Scan  ------------------------------------------------------
+  
+  if [ -x "$(command -v python3)" ] &&  [ -f $SEEKERX_HOME/tools/JS-Leaks.py ] &&  [ -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.js_leak ]
+ then
+    echo -e "${GREEN}[+] Start Search in Javascript files ${NC}"
+    python3 $SEEKERX_HOME/tools/JS-Leaks.py -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt -o $outputdir/$projectname/$1/vuln/ -d $1
+    mv $outputdir/$projectname/$1/vuln/js_endpoinnts.txt $outputdir/$projectname/$1/recon/endpoints/
+    if [ -x "$(command -v httpx)" ] && [ -f $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt ]
+    then
+      cat $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt | httpx -silent  -mc 200 -o $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts_live.txt
+      rm $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt
+    fi
+    touch $outputdir/$projectname/$1/.progress/.js_leak
+  fi
+  
+  
  #------------------------------------------ Parameter scan ----------------------------------------------#
+ 
+ echo -e "${GREEN}[+] Start parameters Collecting ${NC}"
  
  cat $outputdir/$projectname/$1/recon/endpoints/*.txt | cut -d "?" -f1 | sort -u > $outputdir/$projectname/$1/recon/endpoints/all_endpoints.txt
  mkdir -p $outputdir/$projectname/$1/recon/endpoints/param_fuzzing
@@ -297,20 +378,70 @@ function endpointsFuzzing {
    arjun -i  $outputdir/$projectname/$1/recon/endpoints/all_endpoints.txt -o $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/arjun.json
    touch $outputdir/$projectname/$1/.progress/.arjun
    fi
-   
+
+ #----------------------------------- XSS Scan--------------------------------------------#
+ 
+ if [ -x "$(command -v kxss)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.kxss ]
+    then
+    
+      echo -e "${GREEN}[+] Collect possible XSS ${NC}"
+      cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/all_params.txt | kxss >> $outputdir/$projectname/$1/vuln/kxss.txt
+      touch $outputdir/$projectname/$1/.progress/.kxss
+    fi
+#----------------------------------- SSRF Scan--------------------------------------#
+  
+  if [ -x "$(command -v gf)" ] && [ -x "$(command -v waybackurls)" ] && [ -f ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.ssrf-possible ]
+  then
+    echo -e "${GREEN}[+] Collect possible SSRF${NC}"
+    
+    cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/all_params.txt | sort -u  | gf ssrf | tee -a $outputdir/$projectname/$1/vuln/ssrf-possible.txt
+    touch $outputdir/$projectname/$1/.progress/.ssrf-possible
+  
+  fi
+
+#-------------------------------------------- LFI Scan------------------------------------------#
+  
+  if [ -x "$(command -v gf)" ] && [ -f ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.lfi-possible ]
+  then
+    echo -e "${GREEN}[+] Collect possible LFI${NC}"
+    cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/all_params.txt | sort -u  | gf lfi | tee -a $outputdir/$projectname/$1/vuln/lfi-possible.txt
+    touch $outputdir/$projectname/$1/.progress/.lfi-possible
+  
+  fi
+  
+  #----------------------------------- Google Dorks-----------------------------------------------#
+  
+  if [ -f $SEEKERX_HOME/tools/Fast-Google-Dorks-Scan/FGDS.sh ] && ! [ -f $outputdir/$projectname/$1/.progress/.google-dorks]
+  then 
+    echo -e "${GREEN}[+] Scan for Google Dorks ${NC}"
+    
+    mkdir $outputdir/$projectname/$1/recon/Dorks
+    bash $SEEKERX_HOME/tools/Fast-Google-Dorks-Scan/FGDS.sh $1 >> $outputdir/$projectname/$1/recon/Dorks/google_dorks.txt
+    touch $outputdir/$projectname/$1/.progress/.google-dorks
+  fi
+
+  #----------------------------------- Github Dorks-----------------------------------------------#
+  if [ -x "$(command gitdorks_go)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.git-dorks]
+  then
+    if [ "$mode" = "deep" ]; then
+        echo -e "${GREEN}[+] Scan for Github Dorks ${NC}"
+				gitdorks_go -gd $$SEEKERX_HOME/tools/gitdorks_go/Dorks/medium_dorks.txt -nws 20 -target "$domain" -tf "${GITHUB_TOKENS}" -ew 3 | anew -q $outputdir/$projectname/$1/recon/Dorks/git_dorks.txt
+			else
+				gitdorks_go -gd $$SEEKERX_HOME/tools/gitdorks_go/Dorks/smalldorks.txt -nws 20 -target $domain -tf "${GITHUB_TOKENS}" -ew 3 | anew -q $outputdir/$projectname/$1/recon/Dorks/git_dorks.txt
+			fi
+   touch $outputdir/$projectname/$1/.progress/.git-dorks
+  fi
+
+  
 }
 
+
+
+
+
+
+
 function checkForVulns {
-
-#----------------------------------- ZoneTransfer ------------------------------------------------------#
-
-
-  if [ -x "$(command -v $SEEKERX_HOME/tools/DNSaxfr/DNSaxfr.sh)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.zonetransfer ]
-    then
-      printf "${GREEN}[+]  Try ZoneTransfer on $1 ${NC}";
-      $SEEKERX_HOME/tools/DNSaxfr/DNSaxfr.sh -r0 $1 >> $outputdir/$projectname/$1/vuln/zonetransfer.txt
-      touch $outputdir/$projectname/$1/.progress/.zonetransfer
-    fi
 
 
 #-----------------------------------Get Package.json paths-------------------------------------------------------#
@@ -319,6 +450,7 @@ function checkForVulns {
   if [ -x "$(command -v httpx)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.dependency_paths ]
     then
       printf "${GREEN}[+]  Try to find package.json ${NC}";
+      
       cat $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt | httpx -silent -path /package.json -mc 200 -o $outputdir/$projectname/$1/recon/endpoints/dependency_paths.txt
       touch $outputdir/$projectname/$1/.progress/.dependency_paths
     fi
@@ -327,7 +459,7 @@ function checkForVulns {
 
   if [ -s $outputdir/$projectname/$1/vuln/dependency_paths.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.dependency_confusion ]
     then
-      if [ -x "$(command -v $SEEKERX_HOME/tools/DepFine/DepFine.py)" ]
+      if [ -f $SEEKERX_HOME/tools/DepFine/DepFine.py ]
         then
           mkdir $outputdir/$projectname/$1/vuln/dependency_confusion
             printf "\n${GREEN}[+]  Try to Confusion Dependencies  from collected package.json files ${NC}\n";
@@ -341,38 +473,205 @@ function checkForVulns {
         fi
       touch $outputdir/$projectname/$1/.progress/.dependency_confusion
     fi
+#----------------------------------- Shodan IPs -----------------------------------------------#
+  if [ -x "$(command -v uncover)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.uncover ] && [ $SHODAN_API_KEY != "" ]
+  then
+    echo -e "${GREEN}[+] Start Shodan Scanning ${NC}"
+    echo "ssl:$1" | uncover -e shodan >> $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt
+    touch $outputdir/$projectname/$1/.progress/.uncover
 
+fi
+
+  
 #----------------------------------- nuclei -----------------------------------------------#
 
   if [ -x "$(command -v nuclei)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.nuclei ]
     then
-      printf "\n${GREEN}[+]  nuclei Started ${NC}\n";
-      cat $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt | nuclei -t $Nuclei_Templates_Path -o $outputdir/$projectname/$1/vuln/nuclei.txt
+      printf "\n${GREEN}[+]  Nuclei Scanning ${NC}\n";
+      cat $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt | nuclei -silent -t $Nuclei_Templates_Path -o $outputdir/$projectname/$1/vuln/nuclei.txt
       touch $outputdir/$projectname/$1/.progress/.nuclei
     fi      
 
 #----------------------------------- Detect Wordpress -----------------------------------------------#
 
-  if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ]
+  if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.wordpress_detect ] 
   then
+  echo -e "${GREEN}[+] Start Collect Wordpress Subdomains ${NC}"
     mkdir $outputdir/$projectname/$1/recon/wordpress
     cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "wordpress-detect" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt  
-    
+    touch $outputdir/$projectname/$1/.progress/.wordpress_detect
+    fi
 #----------------------------------- Scan Wordpress -----------------------------------------------#
 
-  if [ -f $SEEKERX_HOME/tools/wpconfig-checker.py ] && [ -x "$(command -v wpscan)" ] && [ -x "$(command -v python)" ] && [-f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt ]
+  if [ -f $SEEKERX_HOME/tools/wpconfig-checker.py ] && [ -x "$(command -v wpscan)" ] && [ -x "$(command -v python)" ]  &&  [ -f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.wordpress_scan ]
   then
-    python3 $SEEKERX_HOME/tools/wpconfig-checker.py -f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt 
+    echo -e "${GREEN}[+] Scanning Wordpress Subdomains ${NC}"
+
+    if [ $WordPress_Api != "" ]
+    then
+      python3 $SEEKERX_HOME/tools/wpconfig-checker.py  -a $WordPress_Api -f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt >> $outputdir/$projectname/$1/vuln/wordpress.txt
+    else
+      python3 $SEEKERX_HOME/tools/wpconfig-checker.py -f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt >> $outputdir/$projectname/$1/vuln/wordpress.txt
+    fi
+    touch $outputdir/$projectname/$1/.progress/.wordpress_scan
   fi
+#-----------------------------------drupal Detect-----------------------------------------------#
+
+if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_detect ]
+then
+  echo -e "${GREEN}[+] Start Collect Drupal Subdomains ${NC}"
+  mkdir $outputdir/$projectname/$1/recon/drupal
+    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep | grep "\[*cpanel*\]"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt  
+ touch $outputdir/$projectname/$1/.progress/.drupal_detect
+ fi
+#-----------------------------------drupal scan-----------------------------------------------#
+
+if [ -f  $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_scan ]
+then
+  echo -e "${GREEN}[+] Scanning drupal Subdomains ${NC}"
+  current_dir=$(pwd)
+  cd $SEEKERX_HOME/tools/droopescan
+  python3 droopescan scan drupal -U $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt -t 32 -e a >> $outputdir/$projectname/$1/vuln/drupal.txt
+  cd $current_dir  
+  touch $outputdir/$projectname/$1/.progress/.drupal_scan
+fi
+
+#-----------------------------------joomla Detect-----------------------------------------------#
+if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.joomla_detect ]
+then
+  echo -e "${GREEN}[+] Start Collect Joomla Subdomains ${NC}"
+  
+  mkdir $outputdir/$projectname/$1/recon/joomla
+  cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep | grep "\[*joomla*\]"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt  
+ touch $outputdir/$projectname/$1/.progress/.joomla_detect
+ fi
+#-----------------------------------joomla scan-----------------------------------------------#
+
+if [ -f  $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.joomla_scan ] && [ -f $SEEKERX_HOME/tools/joomscan/joomscan.pl ]
+then
+  echo -e "${GREEN}[+] Scanning Joomla Subdomains ${NC}"
+  current_dir=$(pwd)
+  cd $SEEKERX_HOME/tools/joomscan
+  perl joomscan.pl -m $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt -ec
+  mkdir $outputdir/$projectname/$1/vuln/joomla
+  mv ./reports/*.$1/*.txt $outputdir/$projectname/$1/vuln/joomla
+  cd $current_dir
+  touch $outputdir/$projectname/$1/.progress/.joomla_scan
+fi
+#-----------------------------------AEM Detect-----------------------------------------------#
+
+if  [ -f $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.aem_detect ] && [ -f $SEEKERX_HOME/tools/aem-hacker/aem_discoverer.py ]
+then
+  echo -e "${GREEN}[+] Start Collect AEM adobe Subdomains ${NC}"
+  mkdir $outputdir/$projectname/$1/recon/AEM
+  python3 $SEEKERX_HOME/tools/aem-hacker/aem_discoverer.py --file $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt >> $outputdir/$projectname/$1/recon/AEM/aem_subdomains.txt
+ touch $outputdir/$projectname/$1/.progress/.joomla_detect
+ fi
+#-----------------------------------AEM scan-----------------------------------------------#
+
+if [ -f  $outputdir/$projectname/$1/recon/AEM/aem_subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.aem_scan ] && [ -f $SEEKERX_HOME/tools/aem-hacker/aem_hacker.py ] 
+then
+  echo -e "${GREEN}[+] Scanning AEM Subdomains ${NC}"
+  if [ $BURPCOLLAP_OR_ANY_IP_YOU_CONTROL == ""]
+    then
+      BURPCOLLAP_OR_ANY_IP_YOU_CONTROL="dummy.domain"
+    fi
+  mkdir $outputdir/$projectname/$1/vuln/aem 
+  for url in $(cat $outputdir/$projectname/$1/recon/AEM/aem_subdomains.txt);
+    do
+    python3 $SEEKERX_HOME/tools/aem-hacker/aem_hacker.py -u $url --host $BURPCOLLAP_OR_ANY_IP_YOU_CONTROL >>  $outputdir/$projectname/$1/vuln/aem/$url
+    done
+
+  touch $outputdir/$projectname/$1/.progress/.aem_scan
+fi
+#-----------------------------------Cpanel Detect-----------------------------------------------#
+
+if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.Cpanel_detect ]
+then
+  echo -e "${GREEN}[+] Collect Cpanel Subdomains ${NC}"
+  
+  mkdir $outputdir/$projectname/$1/recon/Cpanel
+    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "drupal-detect" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/Cpanel/Cpanel-subdomains.txt  
+ touch $outputdir/$projectname/$1/.progress/.Cpanel_detect
+ fi
+ #-----------------------------------Cpanel scan-----------------------------------------------#
+
+
+# Just nuclei till now , Maybe add more next version
+
+
+
+
+# ------------------------------------Jira Detect-----------------------------------------------------
+if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.Jira_detect ]
+then
+  echo -e "${GREEN}[+] Collect Jira Subdomains ${NC}"
+  mkdir $outputdir/$projectname/$1/recon/Jira
+  cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "jira-detect" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/Jira/Jira-subdomains.txt
+  touch $outputdir/$projectname/$1/.progress/.Jira_detect
+fi
+
+# ------------------------------------Jira Scan-----------------------------------------------------
+
+# Just nuclei scan and maybe add more next version
+
+# if [ -f  $outputdir/$projectname/$1/recon/Jira/Jira-subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.Jira_scan ] 
+# then
+#   mkdir $outputdir/$projectname/$1/vuln/Jira
+#   cat $outputdir/$projectname/$1/vuln/nuclei.txt |  grep  "jira-detect"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/vuln/Jira/Jira.txt
+  
+#   touch $outputdir/$projectname/$1/.progress/.Jira_scan
+# fi
+
+
+
+
+# ------------------------------------Grafana Detect-----------------------------------------------------
+if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.Grafana_detect ]
+then
+  echo -e "${GREEN}[+] Collect Grafana Subdomains ${NC}"
+  mkdir $outputdir/$projectname/$1/recon/Grafana
+  cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "grafana-detect" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/Grafana/Grafana-subdomains.txt
+  touch $outputdir/$projectname/$1/.progress/.Grafana_detect
+fi
+
+
+# ------------------------------------Grafana Scan-----------------------------------------------------
+
+# Just nuclei scan and maybe add more next version
+
+ # if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.Grafana_scan ]
+ # then
+ #   mkdir $outputdir/$projectname/$1/vuln/Grafana
+ #   cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "[*grafana*]" | grep -v "grafana-detect" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/vuln/Grafana/Grafana.txt
+
+ #   touch $outputdir/$projectname/$1/.progress/.Grafana_scan
+ # fi
+
+# ------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+ 
 }
 function scan {
   echo -e "${BLUE}${BOLD}[+] Scanning domain: ${GREEN}$1${NC}"
   # SubDomains Finding 
   mkdir -p $outputdir/$projectname/$1/.progress
   subdomainsScan $1
+  clear
   endpointsFuzzing $1
+  clear
   subdomainTakeoverScan $1
+  clear
   checkForVulns $1 
+  clear
    
 }
 
@@ -409,3 +708,5 @@ while read -r domain; do
   scan "$domain"
 done < $domainfile
 
+find $outputdir -type f -empty -print
+find $outputdir -type d -empty -exec rmdir {} \;
