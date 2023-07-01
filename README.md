@@ -38,7 +38,7 @@ chmod +x install.sh
 
 ## File config.conf
 
-* 1- Add Shodan API Key
+* 1- Add Shodan API Key   (optional)
   
 ```
 Set SHODAN_API_KEY=""
@@ -52,6 +52,10 @@ SECLISTS="/usr/share/seclists"
 Nuclei_Templates_Path="~/nuclei-templates"
 ```
 
+* 3- Add Wordpress API key  (optional)
+```
+WordPress_Api=""
+```
 
 <!-------------------------------------------------------------------Usage------------------------------------------------------------->
 
