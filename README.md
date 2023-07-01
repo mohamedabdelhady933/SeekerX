@@ -19,6 +19,52 @@
   <a href="#references">References</a>
 </p>
 
+
+
+# Installation
+
+```console
+$ git clone https://github.com/mohamedabdelhady933/SeekerX.git
+$ cd SeekerX
+$ chmod +x install.sh
+$ ./install.sh
+```
+
+<!--------------------------------------------------------------Configuration-------------------------------------------------------->
+
+# Configuration
+
+## File config.conf
+
+* 1- Add Shodan API Key
+  
+```console
+Set SHODAN_API_KEY=""
+```
+
+* 2- Just Check the following paths if they are right.
+
+```
+HOOK_HOME="/home/$USER/SeekerX/tools/hoOk"
+SECLISTS="/usr/share/seclists"
+Nuclei_Templates_Path="~/nuclei-templates"
+```
+
+
+<!-------------------------------------------------------------------Usage------------------------------------------------------------->
+
+# Usage
+
+To start the tool to recon and scan:
+
+```
+$ chmod +x Seekerx.sh
+$ ./Seekerx.sh -d example.com
+```
+
+
+
+
 <!--
 
 #Recon
