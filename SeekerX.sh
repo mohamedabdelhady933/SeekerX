@@ -163,12 +163,6 @@ function checkForTools {
       echo -e "${RED}[-] Download it by 'go get -u github.com/tomnomnom/gf'${NC}"
     fi
 
-    if ! [ ! "$AXIOM" = true   ]
-    then
-      echo -e "${RED}[-]---------- axion not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it by 'bash <(curl -s https://raw.githubusercontent.com/pry0cc/axiom/master/interact/axiom-configure)${NC}"
-    fi
-
     if [ -x "$(command -v gitdorks_go)" ] 
     then
       echo -e "${RED}[-]---------- gitdorks_go not found ----------[-]${NC}"
@@ -262,15 +256,7 @@ function subdomainsScan {
   echo -e "${GREEN}[+] Found $(wc -l $outputdir/$projectname/$1/recon/subdomains/all_subs.txt | cut -f 1 -d " " ) subdomains for $1 ${NC}"
   echo -e "${GREEN}[+] All subdomains can be found in $outputdir/$projectname/$1/recon/subdomains/all_subs.txt"
 
-   #------------------------------------------- s3 scan --------------------------------------------------#
-    
-  if [ "$AXIOM" = true ] && ! [ -f $outputdir/$projectname/$1/.progress/.axiom-s3 ];
-    then
-    echo -e "${GREEN}[+] s3bucket scan Started on $1${NC}"
-    mkdir $outputdir/$projectname/$1/recon/s3buckets
-    axiom-scan $outputdir/$projectname/$1/recon/subdomains/all_subs.txt -m s3scanner -o $outputdir/$projectname/$1/recon/s3buckets/axiom.txt
-    touch $outputdir/$projectname/$1/.progress/.axiom-s3
-  fi
+
   #------------------------------------------- httpx --------------------------------------------------#
   
   if [ -x "$(command -v httpx)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.httpx ]
