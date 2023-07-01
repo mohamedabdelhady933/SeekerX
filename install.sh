@@ -13,14 +13,7 @@ cd tools
   cd gitdorks_go
   bash build.sh
   cd ..
-
-# axiom
-  bash <(curl -s https://raw.githubusercontent.com/pry0cc/axiom/master/interact/axiom-configure)
-
-	# DepFine
-	git clone https://github.com/M359AH/DepFine
-	chmod +x DepFine/DepFine.py
-	pip3 install -r DepFine/requirements.txt 
+  
 
 
   # joomla
