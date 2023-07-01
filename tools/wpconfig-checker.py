@@ -7,6 +7,7 @@ from colorama import Fore
 
 cases={
     "/wp-config.php~",
+    "/wp-config.PHP",
     "/*wp-config.php",
     "/wp-config.php.tmp",
     "/.wp-config.php.swp",
