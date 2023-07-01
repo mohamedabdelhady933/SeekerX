@@ -1,3 +1,20 @@
+<h1 align="center">
+  <img src="static/cover.png" alt="SeekerX" width="200px">
+  <br>
+</h1>
+ <p align="center"> Monitor and notify new subdomains found for a domain on Discord or/and Telegram. </p>
+
+<p align="center">
+<a href="https://twitter.com/sl4x0"><img src="https://img.shields.io/twitter/follow/sl4x0.svg?logo=twitter"></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-_red.svg"></a>
+<a href="https://github.com/sl4x0/SubHound/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
+<img src="https://img.shields.io/badge/Python-3.7-blue">
+</p>
+
+
+
+
+
 #Recon
 
 ![reconBanner](https://user-images.githubusercontent.com/73122852/192073934-85a127ea-55f2-473c-a1b8-09c0f3e2892f.png)
