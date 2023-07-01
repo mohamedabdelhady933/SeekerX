@@ -521,7 +521,7 @@ if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$proje
 then
   echo -e "${GREEN}[+] Start Collect Drupal Subdomains ${NC}"
   mkdir $outputdir/$projectname/$1/recon/drupal
-    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep | grep "\[*cpanel*\]"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt  
+    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "drupal-detect"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt  
  touch $outputdir/$projectname/$1/.progress/.drupal_detect
  fi
 #-----------------------------------drupal scan-----------------------------------------------#
