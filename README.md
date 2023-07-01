@@ -24,8 +24,11 @@
 
 ```
 git clone https://github.com/mohamedabdelhady933/SeekerX.git
+
 cd SeekerX
+
 chmod +x install.sh
+
 ./install.sh
 ```
 
