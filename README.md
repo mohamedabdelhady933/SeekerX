@@ -1,19 +1,25 @@
 <h1 align="center">
-  <img src="static/cover.png" alt="SeekerX" width="200px">
+  <img src="" alt="SeekerX" width="200px" style="background:linear-gradient(to right, #34e89e, #0f3443);color:black">
   <br>
 </h1>
- <p align="center"> Monitor and notify new subdomains found for a domain on Discord or/and Telegram. </p>
+ <p align="center"> Recon and Scan for vulnerabilities. </p>
 
 <p align="center">
-<a href="https://twitter.com/sl4x0"><img src="https://img.shields.io/twitter/follow/sl4x0.svg?logo=twitter"></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-_red.svg"></a>
-<a href="https://github.com/sl4x0/SubHound/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
-<img src="https://img.shields.io/badge/Python-3.7-blue">
+<a href="https://github.com/mohamedabdelhady933/SeekerX/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
+<img src="https://img.shields.io/badge/BashScript-blue">
 </p>
 
+<!------------------------------------------------------------------Installation---------------------------------------------------->
+<p align="center">
+  <a href="#installation">Installation</a> |
+  <a href="#configuration">Configuration</a> |
+  <a href="#usage">Usage</a> |
+  <a href="#running-in-the-background">Running in the Background</a> |
+  <a href="#references">References</a>
+</p>
 
-
-
+<!--
 
 #Recon
 
@@ -39,7 +45,7 @@
   </a> -->
 <!--   <a href="https://discord.gg/R5DdXVEdTy">
     <img src="https://img.shields.io/discord/1048623782912340038.svg?logo=discord">
-  </a> -->
+  </a> 
 </p>
 
 <br><br><br><br><br><br><br><br><br><br>
@@ -89,6 +95,7 @@
  cd MyRecon
  ```
  ```
+
  chmod +x recon.sh
  ```
  ```
