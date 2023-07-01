@@ -15,7 +15,7 @@
   <a href="#installation">Installation</a> |
   <a href="#configuration">Configuration</a> |
   <a href="#usage">Usage</a> |
-  <a href="#running-in-the-background">Example Usage</a> |
+  <a href="#running-in-the-background">Example Usage</a> 
 </p>
 
 
