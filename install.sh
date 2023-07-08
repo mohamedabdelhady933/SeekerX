@@ -16,7 +16,7 @@ cd tools
   #droopscan
   git clone https://github.com/droope/droopescan.git
   cd droopescan/
-  pip3 install -r droopescan/requirements.txt
+  pip3 install -r requirements.txt
   cd ..
   
   # aem
