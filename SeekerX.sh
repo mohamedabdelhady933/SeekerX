@@ -238,7 +238,7 @@ function subdomainsScan {
   if [ -x "$(command -v subfinder)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.subfinder ]
   then
     echo -e "${GREEN}[+] subfinder Started on $1${NC}"
-    subfinder -d $1 -o $outputdir/$projectname/$1/recon/subdomains/subfinder.txt 
+    subfinder -silent -d $1 -o $outputdir/$projectname/$1/recon/subdomains/subfinder.txt 
     if [ "$mode" == "deep" ]
     then
       cat $outputdir/$projectname/$1/recon/subdomains/* | sort -u > $outputdir/$projectname/$1/recon/subdomains/tmp.txt
