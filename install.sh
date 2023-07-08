@@ -220,4 +220,4 @@ fi
 
 
 
-echo "SEEKERX_HOME="$(pwd)" >> config.conf
+echo "SEEKERX_HOME="$(pwd) >> config.conf
