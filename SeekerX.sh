@@ -113,12 +113,6 @@ function checkForTools {
     echo -e "${RED}[-] Download it with 'go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest'${NC}"
   fi
 
-  if ! [ -x "$(command -v $SEEKERX_HOME/tools/DNSaxfr/DNSaxfr.sh)" ]
-    then
-      echo -e "${RED}[-]---------- DNSaxfr not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it from 'https://github.com/cybernova/DNSaxfr'${NC}"
-      echo -e "${RED}[-] Place it in the tools folder"
-    fi
 
   if ! [ -x "$(command -v dirsearch)" ]
     then
