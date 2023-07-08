@@ -15,14 +15,17 @@ cd tools
 
   #droopscan
   git clone https://github.com/droope/droopescan.git
-  pip install -r droopescan/requirements.txt
+  cd droopescan/
+  pip3 install -r droopescan/requirements.txt
+  cd ..
   
   # aem
   git clone https://github.com/0ang3el/aem-hacker.git
-  pip install -r aem-hacker/requirements.txt
+  pip3 install -r aem-hacker/requirements.txt
   
 
 git clone https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan.git
+chmod +x Fast-Google-Dorks-Scan/FGDS.sh
 	# # ParamSpider
 	# git clone https://github.com/devanshbatham/ParamSpider
 	# pip3 install -r ParamSpider/requirements.txt 
@@ -46,7 +49,7 @@ git clone https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan.git
 # subfinder
 if  [ -x "$(command -v subfinder)" ]
 then
-
+	echo "[+] subfinder already installed";
 else 
 	go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
  	cp /root/go/bin/subfinder /user/local/bin/
@@ -56,7 +59,7 @@ fi
 
 if  [ -x "$(command -v sublist3r)" ]
 then
-
+	echo "[+] sublist3r already installed";
 else 
 	pip3 install sublist3r
 fi
@@ -65,7 +68,7 @@ fi
 
 if  [ -x "$(command -v assetfinder)" ]
 then
-
+	echo "[+] assetfinder already installed";
 else 
 	go install -v github.com/tomnomnom/assetfinder@latest
 	cp /root/go/bin/assetfinder /user/local/bin/
@@ -85,7 +88,7 @@ fi
 
 if  [ -x "$(command -v gobuster)" ]
 then
-
+	echo "[+] gobuster already installed";
 else 
 	go install github.com/OJ/gobuster/v3@latest
 	cp /root/go/bin/gobuster /user/local/bin/
@@ -96,7 +99,7 @@ fi
 
 if  [ -x "$(command -v subzy)" ]
 then
-
+	echo "[+] subzy already installed";
 else 
 	go install -v github.com/LukaSikic/subzy@latest
 	cp /root/go/bin/subzy /user/local/bin/
@@ -106,7 +109,7 @@ fi
 
 if  [ -x "$(command -v gau)" ]
 then
-
+	echo "[+] gau already installed";
 else 
 	go install github.com/lc/gau/v2/cmd/gau@latest
 	cp /root/go/bin/gau /user/local/bin/
@@ -116,7 +119,7 @@ fi
 
 if  [ -x "$(command -v waybackurls)" ]
 then
-
+	echo "[+] waybackurls already installed";
 else 
 	go install -v github.com/tomnomnom/waybackurls@latest
 	cp /root/go/bin/waybackurls /user/local/bin/
@@ -127,7 +130,7 @@ fi
 
 if  [ -x "$(command -v httpx)" ]
 then
-
+	echo "[+] httpx already installed";
 else 
 	go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 	cp /root/go/bin/httpx /user/local/bin/
@@ -148,7 +151,7 @@ fi
 
 if  [ -x "$(command -v nuclei)" ]
 then
-
+	echo "[+] nuclei already installed";
 else 
 	go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 	cp /root/go/bin/nuclei /user/local/bin/
@@ -158,7 +161,7 @@ fi
 
 if  [ -x "$(command -v gospider)" ]
 then
-
+	echo "[+] gospider already installed";
 else 
 	go install -v github.com/jaeles-project/gospider@latest
 	cp /root/go/bin/gospider /user/local/bin/
@@ -168,7 +171,7 @@ fi
 
 if  [ -x "$(command -v kxss)" ]
 then
-
+	echo "[+] kxss already installed";
 else 
 	go install -v github.com/Emoe/kxss@latest
 	cp /root/go/bin/kxss /user/local/bin/
@@ -178,7 +181,7 @@ fi
 
 if  [ -x "$(command -v gitdorks_go)" ]
 then
-
+	echo "[+] gitdorks_go already installed";
 else 
 	go install -v github.com/damit5/gitdorks_go@latest
 	cp /root/go/bin/gitdorks_go /user/local/bin/
@@ -188,7 +191,7 @@ fi
 
 if  [ -x "$(command -v dirsearch)" ]
 then
-
+	echo "[+] dirsearch already installed";
 else 
 	pip3 install dirsearch
 fi
@@ -196,7 +199,7 @@ fi
 #arjun
 if  [ -x "$(command -v arjun)" ]
 then
-
+	echo "[+] arjun already installed";
 else 
 	pip3 install arjun
 fi
@@ -206,7 +209,7 @@ fi
 
 if  [ -x "$(command -v wpscan)" ]
 then
-
+	echo "[+] wpscan already installed";
 else 
 	gem install wpscan
  	apt install wpscan
