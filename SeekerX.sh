@@ -46,11 +46,11 @@ function checkForTools {
     echo -e "${RED}[-] Download it with 'go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest'${NC}"
   fi
 
-  if ! [ -x "$(command -v sublist3r)" ]
-  then
-    echo -e "${RED}[-]---------- sublist3r not found ----------[-]${NC}"
-    echo -e "${RED}[-] Download it with 'pip3 install sublist3r'${NC}"
-  fi
+  # if ! [ -x "$(command -v sublist3r)" ]
+  # then
+  #   echo -e "${RED}[-]---------- sublist3r not found ----------[-]${NC}"
+  #   echo -e "${RED}[-] Download it with 'pip3 install sublist3r'${NC}"
+  # fi
 
   if ! [ -x "$(command -v assetfinder)" ]
   then
@@ -189,12 +189,12 @@ function subdomainsScan {
 
   #------------------------------------------- sublist3r --------------------------------------------------#
   
-  if [ -x "$(command -v sublist3r)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.sublist3r ]
-  then
-    echo -e "${GREEN}[+] sublist3r Started on $1${NC}"
-    sublist3r -d $1 -o $outputdir/$projectname/$1/recon/subdomains/sublist3r.txt 
-    touch $outputdir/$projectname/$1/.progress/.sublist3r
-  fi
+  # if [ -x "$(command -v sublist3r)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.sublist3r ]
+  # then
+  #   echo -e "${GREEN}[+] sublist3r Started on $1${NC}"
+  #   sublist3r -d $1 -o $outputdir/$projectname/$1/recon/subdomains/sublist3r.txt 
+  #   touch $outputdir/$projectname/$1/.progress/.sublist3r
+  # fi
 
   #------------------------------------------- assetfinder --------------------------------------------------#
   if [ -x "$(command -v assetfinder)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.assetfinder ]
@@ -290,7 +290,7 @@ function endpointsScan {
   #------------------------------------------ waybackurls ----------------------------------------------#
   if [ -x "$(command -v waybackurls)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.waybackurls ]
   then
-    echo -e "${GREEN}[+] gau Started on $1${NC}"
+    echo -e "${GREEN}[+] wayabackurls Started on $1${NC}"
     cat $outputdir/$projectname/$1/recon/subdomains/* | sort -u | waybackurls > $outputdir/$projectname/$1/recon/endpoints/waybackurls.txt
     touch $outputdir/$projectname/$1/.progress/.waybackurls
   fi 
