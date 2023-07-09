@@ -56,7 +56,7 @@ then
 	echo "[+] subfinder already installed";
 else 
 	go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
- 	cp /root/go/bin/subfinder /user/local/bin/
+ 	cp /root/go/bin/subfinder /usr/local/bin/
 fi
 
 # sublist3r
@@ -75,7 +75,7 @@ then
 	echo "[+] assetfinder already installed";
 else 
 	go install -v github.com/tomnomnom/assetfinder@latest
-	cp /root/go/bin/assetfinder /user/local/bin/
+	cp /root/go/bin/assetfinder /usr/local/bin/
 fi
 
 # amass
@@ -85,7 +85,7 @@ fi
 
 # else 
 # 	go install -v github.com/owasp-amass/amass/v3/...@master
-# 	cp /root/go/bin/amass /user/local/bin/
+# 	cp /root/go/bin/amass /usr/local/bin/
 # fi
 
 # gobuster
@@ -95,7 +95,7 @@ then
 	echo "[+] gobuster already installed";
 else 
 	go install github.com/OJ/gobuster/v3@latest
-	cp /root/go/bin/gobuster /user/local/bin/
+	cp /root/go/bin/gobuster /usr/local/bin/
 fi
 
 
@@ -106,7 +106,7 @@ then
 	echo "[+] subzy already installed";
 else 
 	go install -v github.com/LukaSikic/subzy@latest
-	cp /root/go/bin/subzy /user/local/bin/
+	cp /root/go/bin/subzy /usr/local/bin/
 fi
 
 # gau
@@ -116,7 +116,7 @@ then
 	echo "[+] gau already installed";
 else 
 	go install github.com/lc/gau/v2/cmd/gau@latest
-	cp /root/go/bin/gau /user/local/bin/
+	cp /root/go/bin/gau /usr/local/bin/
 fi
 
 # waybackurls
@@ -126,7 +126,7 @@ then
 	echo "[+] waybackurls already installed";
 else 
 	go install -v github.com/tomnomnom/waybackurls@latest
-	cp /root/go/bin/waybackurls /user/local/bin/
+	cp /root/go/bin/waybackurls /usr/local/bin/
 fi
 
 
@@ -137,7 +137,7 @@ then
 	echo "[+] httpx already installed";
 else 
 	go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
-	cp /root/go/bin/httpx /user/local/bin/
+	cp /root/go/bin/httpx /usr/local/bin/
 fi
 
 
@@ -147,7 +147,7 @@ fi
 
 # else 
 # 	go install -v github.com/visma-prodsec/confused@latest
-# 	cp /root/go/bin/confused /user/local/bin/
+# 	cp /root/go/bin/confused /usr/local/bin/
 # fi
 
 
@@ -158,7 +158,7 @@ then
 	echo "[+] nuclei already installed";
 else 
 	go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
-	cp /root/go/bin/nuclei /user/local/bin/
+	cp /root/go/bin/nuclei /usr/local/bin/
 fi
 
 # gospider
@@ -168,7 +168,7 @@ then
 	echo "[+] gospider already installed";
 else 
 	go install -v github.com/jaeles-project/gospider@latest
-	cp /root/go/bin/gospider /user/local/bin/
+	cp /root/go/bin/gospider /usr/local/bin/
 fi
 
 #kxss
@@ -178,7 +178,7 @@ then
 	echo "[+] kxss already installed";
 else 
 	go install -v github.com/Emoe/kxss@latest
-	cp /root/go/bin/kxss /user/local/bin/
+	cp /root/go/bin/kxss /usr/local/bin/
 fi
 
 #gitdorks_go
@@ -188,7 +188,7 @@ then
 	echo "[+] gitdorks_go already installed";
 else 
 	go install -v github.com/damit5/gitdorks_go@latest
-	cp /root/go/bin/gitdorks_go /user/local/bin/
+	cp /root/go/bin/gitdorks_go /usr/local/bin/
 fi
 
 #dirsearch
