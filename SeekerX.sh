@@ -22,7 +22,7 @@ EOF
 }
 
 function usage {
-  echo -e "${BLUE}${BOLD}Usage${NC}: ${GREEN}$0${NC} ${YELLOW}-p${NC} projectname ${YELLOW}-d${NC} domainfilepath [${YELLOW}-o${NC} outputdir]"
+  echo -e "\n${BLUE}${BOLD}Usage${NC}: ${GREEN}$0${NC} ${YELLOW}-p${NC} projectname ${YELLOW}-d${NC} domainfilepath [${YELLOW}-o${NC} outputdir]\n"
   echo -e "Options:"
   echo -e "  ${YELLOW}-p | --projectname  ${NC} : Specify the project name (Output Directory Name)"
   echo -e "  ${YELLOW}-d | --domainfile   ${NC} : Specify the path to the domain file (ex: domains.txt)"
@@ -36,15 +36,15 @@ function usage {
 function checkForTools {
   if ! [ -f $HOOK_HOME/hoOk.py ]
   then
-    echo -e "${RED}[-]---------- hoOk not found ----------[-]${NC}"
+    echo -e "\n${RED}[-]---------- hoOk not found ----------[-]${NC}\n"
     echo -e "${RED}[-] Download it from https://github.com/mrxdevil404/hoOk.git${NC}"
-    echo -e "${RED}[-] Make sure you define it path correctly in config.conf ${NC}"
+    echo -e "${RED}[-] Make sure you define it path correctly in config.conf ${NC}\n"
   fi
 
   if ! [ -x "$(command -v subfinder)" ]
   then
-    echo -e "${RED}[-]---------- subfinder not found ----------[-]${NC}"
-    echo -e "${RED}[-] Download it with 'go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest'${NC}"
+    echo -e "\n${RED}[-]---------- subfinder not found ----------[-]${NC}"
+    echo -e "${RED}[-] Download it with 'go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest'${NC}\n"
   fi
 
   # if ! [ -x "$(command -v sublist3r)" ]
@@ -55,8 +55,8 @@ function checkForTools {
 
   if ! [ -x "$(command -v assetfinder)" ]
   then
-    echo -e "${RED}[-]---------- assetfinder not found ----------[-]${NC}"
-    echo -e "${RED}[-] Download it with 'go install -v github.com/tomnomnom/assetfinder@latest'${NC}"
+    echo -e "\n${RED}[-]---------- assetfinder not found ----------[-]${NC}"
+    echo -e "${RED}[-] Download it with 'go install -v github.com/tomnomnom/assetfinder@latest'${NC}\n"
   fi
 
   # if ! [ -x "$(command -v amass)" ]
@@ -67,51 +67,51 @@ function checkForTools {
 
   if ! [ -x "$(command -v gobuster)" ]
     then 
-      echo -e "${RED}[-]---------- gobuster not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it with 'go install github.com/OJ/gobuster/v3@latest'${NC}"
+      echo -e "\n${RED}[-]---------- gobuster not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it with 'go install github.com/OJ/gobuster/v3@latest'${NC}\n"
     fi
 
   if ! [ -d "$SECLISTS" ]
    then
-    echo -e "${RED}[-]---------- seclists not found ----------[-]${NC}"
+    echo -e "\n${RED}[-]---------- seclists not found ----------[-]${NC}"
     echo -e "${RED}[-] Download it from https://github.com/danielmiessler/SecLists${NC}"
-    echo -e "${RED}[-] Add its path to the config file${NC}"
+    echo -e "${RED}[-] Add its path to the config file${NC}\n"
   fi
 
   if ! [ -x "$(command -v subzy)" ]
     then 
-      echo -e "${RED}[-]---------- subzy not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it with 'go install -v github.com/LukaSikic/subzy@latest'${NC}"
+      echo -e "\n${RED}[-]---------- subzy not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it with 'go install -v github.com/LukaSikic/subzy@latest'${NC}\n"
     fi
 
   if ! [ -x "$(command -v gau)" ]
     then 
-      echo -e "${RED}[-]---------- gau not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it with 'go install github.com/lc/gau/v2/cmd/gau@latest'${NC}"
+      echo -e "\n${RED}[-]---------- gau not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it with 'go install github.com/lc/gau/v2/cmd/gau@latest'${NC}\n"
     fi
 
   if ! [ -x "$(command -v waybackurls)" ]
     then 
-      echo -e "${RED}[-]---------- waybackurls not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it with 'go install -v github.com/tomnomnom/waybackurls@latest'${NC}"
+      echo -e "\n${RED}[-]---------- waybackurls not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it with 'go install -v github.com/tomnomnom/waybackurls@latest'${NC}\n"
     fi
 
   if ! [ -x "$(command -v httpx)" ]
     then 
-      echo -e "${RED}[-]---------- httpx not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it with 'go install github.com/projectdiscovery/httpx/cmd/httpx@latest'${NC}"
+      echo -e "\n${RED}[-]---------- httpx not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it with 'go install github.com/projectdiscovery/httpx/cmd/httpx@latest'${NC}\n"
     fi
 
   if ! [ -f $SEEKERX_HOME/tools/DepFine/DepFine.py ]
     then 
-      echo -e "${RED}[-]---------- DepFine not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it with 'git clone https://github.com/M359AH/DepFine.git '${NC}"
+      echo -e "\n${RED}[-]---------- DepFine not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it with 'git clone https://github.com/M359AH/DepFine.git '${NC}\n"
     fi
 
   if ! [ -x "$(command -v nuclei)" ]
   then
-    echo -e "${RED}[-]---------- nuclei not found ----------[-]${NC}"
-    echo -e "${RED}[-] Download it with 'go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest'${NC}"
+    echo -e "\n${RED}[-]---------- nuclei not found ----------[-]${NC}"
+    echo -e "${RED}[-] Download it with 'go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest'${NC}\n"
   fi
 
 
@@ -123,61 +123,61 @@ function checkForTools {
 
   if ! [ -x "$(command -v arjun)" ]
     then
-      echo -e "${RED}[-]---------- arjun not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it by 'pip3 install arjun'${NC}"
+      echo -e "\n${RED}[-]---------- arjun not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it by 'pip3 install arjun'${NC}\n"
     fi
 
   if ! [ -f $SEEKERX_HOME/tools/wpconfig-checker.py ]
     then
-      echo -e "${RED}[-]---------- wpconfig-checker not found ----------[-]${NC}"
+      echo -e "\n${RED}[-]---------- wpconfig-checker not found ----------[-]${NC}"
       echo -e "${RED}[-] Download it by 'wget https://raw.githubusercontent.com/mohamedabdelhady933/Wordpress-Config-Enum/main/wpconfig-checker.py'${NC}"
-      echo -e "${RED}[-] Place it in the tools folder"
+      echo -e "${RED}[-] Place it in the tools folder\n"
     fi
 
     if ! [ -x "$(command -v wpscan)" ]
     then
-      echo -e "${RED}[-]---------- wpscan not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it by 'gem install wpscan'${NC}"
+      echo -e "\n${RED}[-]---------- wpscan not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it by 'gem install wpscan'${NC}\n"
     fi
     
     if ! [ -x "$(command -v gospider)" ]
     then
-      echo -e "${RED}[-]---------- gospider not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it by 'go install -v github.com/jaeles-project/gospider@latest'${NC}"
+      echo -e "\n${RED}[-]---------- gospider not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it by 'go install -v github.com/jaeles-project/gospider@latest'${NC}\n"
     fi
 
     if ! [ -x "$(command -v kxss)" ]
     then
-      echo -e "${RED}[-]---------- kxss not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it by 'go install -v github.com/Emoe/kxss@latest'${NC}"
+      echo -e "\n${RED}[-]---------- kxss not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it by 'go install -v github.com/Emoe/kxss@latest'${NC}\n"
     fi
     
     if ! [ -x "$(command -v gf)" ]
     then
-      echo -e "${RED}[-]---------- gf not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it by 'go get -u github.com/tomnomnom/gf'${NC}"
+      echo -e "\n${RED}[-]---------- gf not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it by 'go get -u github.com/tomnomnom/gf'${NC}\n"
     fi
 
     if ! [ -x "$(command -v gitdorks_go)" ] 
     then
-      echo -e "${RED}[-]---------- gitdorks_go not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it from 'https://github.com/damit5/gitdorks_go' and place it in the tools dir and build it${NC}"
+      echo -e "\n${RED}[-]---------- gitdorks_go not found ----------[-]${NC}"
+      echo -e "${RED}[-] Download it from 'https://github.com/damit5/gitdorks_go' and place it in the tools dir and build it${NC}\n"
     fi 
-  echo -e "${GREEN}[+] Done!!"
+  echo -e "\n${GREEN}[+] Tools Check Done!!\n"
 
   
   
 }
 
 function subdomainsScan {
-  echo -e "${YELLOW}[+] The Project saved in $outputdir/$projectname/$1 \n"
+  echo -e "\n${YELLOW}[+] The Project saved in $outputdir/$projectname/$1 \n"
   mkdir -p $outputdir/$projectname/$1/recon/subdomains
-  echo -e "${YELLOW}[+] Passive subdomains scanning for $1${NC}"
+  echo -e "${YELLOW}[+] Passive subdomains scanning for $1${NC}\n"
 
   #------------------------------------------ hoOk ----------------------------------------------#
   if [ -f $HOOK_HOME/hoOk.py ] && ! [ -f $outputdir/$projectname/$1/.progress/.hook ]
   then
-    echo -e "${GREEN}[+] hoOk Started on $1${NC}"
+    echo -e "\n${GREEN}[+] hoOk Started on $1${NC}\n"
     currentplace="$(pwd)"
     cd $HOOK_HOME
     python3 hoOk.py -t $1 
