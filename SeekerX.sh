@@ -157,7 +157,7 @@ function checkForTools {
       echo -e "${RED}[-] Download it by 'go get -u github.com/tomnomnom/gf'${NC}"
     fi
 
-    if [ -x "$(command -v gitdorks_go)" ] 
+    if ! [ -x "$(command -v gitdorks_go)" ] 
     then
       echo -e "${RED}[-]---------- gitdorks_go not found ----------[-]${NC}"
       echo -e "${RED}[-] Download it from 'https://github.com/damit5/gitdorks_go' and place it in the tools dir and build it${NC}"
