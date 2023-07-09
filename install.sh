@@ -7,8 +7,12 @@ cd tools
 	pip3 install -r hoOk/requirements.txt 
 	chmod +x hoOk/hoOk.py
 
-
-
+# DepFine
+	git clone https://github.com/M359AH/DepFine.git
+	cd DepFine/
+ 	pip3 install -r requirements.txt
+  	cd ..
+  
   # joomla
   git clone https://github.com/OWASP/joomscan.git
   
