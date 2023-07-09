@@ -18,6 +18,7 @@ function banner  {
 EOF
   echo -e "${GREEN} SeekerX -  Reconnaissance & Scanning tool by ALi(0x41ly) & Mohamed Abdelhady${NC}"
   echo ""
+  sleep 5
 }
 
 function usage {
