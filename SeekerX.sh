@@ -114,11 +114,11 @@ function checkForTools {
   fi
 
 
-  if ! [ -x "$(command -v dirsearch)" ]
-    then
-      echo -e "${RED}[-]---------- dirsearch not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it by 'pip3 install dirsearch'${NC}"
-    fi
+  # if ! [ -x "$(command -v dirsearch)" ]
+  #   then
+  #     echo -e "${RED}[-]---------- dirsearch not found ----------[-]${NC}"
+  #     echo -e "${RED}[-] Download it by 'pip3 install dirsearch'${NC}"
+  #   fi
 
   if ! [ -x "$(command -v arjun)" ]
     then
@@ -302,20 +302,20 @@ function endpointsScan {
 function endpointsFuzzing {
   #------------------------------------------ Dirsearch ----------------------------------------------#
   
-  if [ -x "$(command -v dirsearch)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.dirsearch ]
-  then
-    echo -e "${GREEN}[+] dirsearch Started on $1${NC}"
-        if [ "$mode" == "deep" ]
-          then
-            dirsearch -l $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt -x 404 -w $SECLISTS/Discovery/Web-Content/directory-list-2.3-medium.txt  -o $outputdir/$projectname/$1/recon/endpoints/dirsearch.txt
-    else
-        dirsearch -l $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt -x 404,500 -o $outputdir/$projectname/$1/recon/endpoints/dirsearch.txt
-      fi
-    sed -i '1d' $outputdir/$projectname/$1/recon/endpoints/dirsearch
-    cat $outputdir/$projectname/$1/recon/endpoints/dirsearch.txt | cut -d " " -f7 | sort -u >>  $outputdir/$projectname/$1/recon/endpoints/dirsearch_endpoints.txt 
-    cat $outputdir/$projectname/$1/recon/endpoints/dirsearch.txt | cut -d " " -f16 | sort -u >>  $outputdir/$projectname/$1/recon/endpoints/dirsearch_endpoints.txt
-    touch $outputdir/$projectname/$1/.progress/.dirsearch
-  fi
+  # if [ -x "$(command -v dirsearch)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.dirsearch ]
+  # then
+  #   echo -e "${GREEN}[+] dirsearch Started on $1${NC}"
+  #       if [ "$mode" == "deep" ]
+  #         then
+  #           dirsearch -l $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt -x 404 -w $SECLISTS/Discovery/Web-Content/directory-list-2.3-medium.txt  -o $outputdir/$projectname/$1/recon/endpoints/dirsearch.txt
+  #   else
+  #       dirsearch -l $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt -x 404,500 -o $outputdir/$projectname/$1/recon/endpoints/dirsearch.txt
+  #     fi
+  #   sed -i '1d' $outputdir/$projectname/$1/recon/endpoints/dirsearch
+  #   cat $outputdir/$projectname/$1/recon/endpoints/dirsearch.txt | cut -d " " -f7 | sort -u >>  $outputdir/$projectname/$1/recon/endpoints/dirsearch_endpoints.txt 
+  #   cat $outputdir/$projectname/$1/recon/endpoints/dirsearch.txt | cut -d " " -f16 | sort -u >>  $outputdir/$projectname/$1/recon/endpoints/dirsearch_endpoints.txt
+  #   touch $outputdir/$projectname/$1/.progress/.dirsearch
+  # fi
 
 #------------------------------------------ js collect ----------------------------------------------#
     echo -e "${GREEN}[+] Start Collect Javascript files${NC}"
