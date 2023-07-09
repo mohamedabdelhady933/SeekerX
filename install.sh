@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+echo "SEEKERX_HOME="$(pwd) >> config.conf
+
 # mkdir -p tools
 cd tools
 	# hoOk
@@ -224,4 +227,4 @@ fi
 
 
 
-echo "SEEKERX_HOME="$(pwd) >> config.conf
+
