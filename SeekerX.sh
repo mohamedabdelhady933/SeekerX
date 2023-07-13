@@ -321,7 +321,8 @@ function endpointsFuzzing {
 #------------------------------------------ js collect ----------------------------------------------#
     echo -e "${GREEN}[+] Start Collect Javascript files${NC}"
     mkdir -p $outputdir/$projectname/$1/recon/endpoints/js
-    cat $outputdir/$projectname/$1/recon/endpoints/* | grep "\.js$"| cut -d '?' -f 1 >> $outputdir/$projectname/$1/recon/endpoints/js/endpoints_js.txt
+    # if get an error edit it to cat $outputdir/$projectname/$1/recon/endpoints/*
+    cat $outputdir/$projectname/$1/recon/endpoints/*/* | grep "\.js$"| cut -d '?' -f 1 >> $outputdir/$projectname/$1/recon/endpoints/js/endpoints_js.txt
     
     if [ -x "$(command -v gospider)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.gospider ]
     then       
@@ -395,7 +396,6 @@ function endpointsFuzzing {
   if [ -f $SEEKERX_HOME/tools/Fast-Google-Dorks-Scan/FGDS.sh ] && ! [ -f $outputdir/$projectname/$1/.progress/.google-dorks]
   then 
     echo -e "${GREEN}[+] Scan for Google Dorks ${NC}"
-    
     mkdir $outputdir/$projectname/$1/recon/Dorks
     bash $SEEKERX_HOME/tools/Fast-Google-Dorks-Scan/FGDS.sh $1 >> $outputdir/$projectname/$1/recon/Dorks/google_dorks.txt
     touch $outputdir/$projectname/$1/.progress/.google-dorks
