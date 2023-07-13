@@ -535,7 +535,11 @@ then
   cd $SEEKERX_HOME/tools/joomscan
   perl joomscan.pl -m $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt -ec
   mkdir $outputdir/$projectname/$1/vuln/joomla
-  mv ./reports/*.$1/*.txt $outputdir/$projectname/$1/vuln/joomla
+  #edit done
+  if [-f reports/*.$1/*.txt ]
+  then
+  	mv ./reports/*.$1/*.txt $outputdir/$projectname/$1/vuln/joomla
+   fi
   cd $current_dir
   touch $outputdir/$projectname/$1/.progress/.joomla_scan
 fi
