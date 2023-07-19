@@ -9,6 +9,7 @@ cd tools
 	git clone https://github.com/mrxdevil404/hoOk.git
 	pip3 install -r hoOk/requirements.txt 
 	chmod +x hoOk/hoOk.py
+ 	echo 'HOOK_HOME="$(pwd)/hoOk"' >> ../config.conf
 
 # DepFine
 	git clone https://github.com/M359AH/DepFine.git
@@ -52,7 +53,7 @@ chmod +x Fast-Google-Dorks-Scan/FGDS.sh
 	# git clone https://github.com/m4ll0k/SecretFinder.git 
 	# python -m pip install -r /SecretFinder/requirements.txt
 
-
+cd ..
 # subfinder
 if  [ -x "$(command -v subfinder)" ]
 then
@@ -223,7 +224,8 @@ else
 fi
 
 
-
+awk '!seen[$0]++' config.conf > tmp
+mv tmp config.conf
 
 
 
