@@ -16,7 +16,7 @@ function banner  {
          "Y88888P"    `"Ybbd8"'   `"Ybbd8"'  88   `Y8a  `"Ybbd8"'  88      8P        Y8 
 
 EOF
-  echo -e "${GREEN} SeekerX -  Reconnaissance & Scanning tool by ALi(0x41ly) & Mohamed Abdelhady${NC}"
+  echo -e "${GREEN} SeekerX -  Reconnaissance & Scanning tool by Aly Khaled (0x41ly) & Mohamed Abdelhady${NC}"
   echo ""
   sleep 5
 }
