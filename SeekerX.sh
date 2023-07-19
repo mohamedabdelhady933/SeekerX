@@ -393,7 +393,7 @@ function endpointsFuzzing {
   
   #----------------------------------- Google Dorks-----------------------------------------------#
   
-  if [ -f $SEEKERX_HOME/tools/Fast-Google-Dorks-Scan/FGDS.sh ] && ! [ -f $outputdir/$projectname/$1/.progress/.google-dorks]
+  if [ -f $SEEKERX_HOME/tools/Fast-Google-Dorks-Scan/FGDS.sh ] && ! [ -f $outputdir/$projectname/$1/.progress/.google-dorks ]
   then 
     echo -e "${GREEN}[+] Scan for Google Dorks ${NC}"
     mkdir $outputdir/$projectname/$1/recon/Dorks
