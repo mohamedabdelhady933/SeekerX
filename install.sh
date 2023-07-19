@@ -9,7 +9,7 @@ cd tools
 	git clone https://github.com/mrxdevil404/hoOk.git
 	pip3 install -r hoOk/requirements.txt 
 	chmod +x hoOk/hoOk.py
- 	echo 'HOOK_HOME="$(pwd)/hoOk"' >> ../config.conf
+ 	echo HOOK_HOME="$(pwd)/hoOk" >> ../config.conf
 
 # DepFine
 	git clone https://github.com/M359AH/DepFine.git
@@ -223,6 +223,13 @@ else
  	apt install wpscan
 fi
 
+if  [ -x "$(command -v gf)" ]
+then
+	echo "[+] gf already installed";
+else 
+	go install -v github.com/tomnomnom/gf@latest
+	cp /root/go/bin/gf /usr/local/bin/
+fi
 
 awk '!seen[$0]++' config.conf > tmp
 mv tmp config.conf
