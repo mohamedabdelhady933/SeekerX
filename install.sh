@@ -42,7 +42,7 @@ then
 	echo "[+] Seclists already installed";
 else 
 	git clone https://github.com/danielmiessler/SecLists.git
- 	mv SecLists /usr/share/
+ 	mv SecLists /usr/share/seclists
 fi
 
 
