@@ -28,7 +28,7 @@
 <p align=""> 5- Collect all endpoints </p>
 <p align=""> 6- Collect all Javascript files </p>
 <p align=""> 7- Collect all Parameters </p>
-<p align=""> 8- Collect all wordpress subdomains </p>
+<p align=""> 8- Filter all possible SSRF and XSS and LFI parameters </p>
 <p align=""> 9- Collect all wordpress subdomains </p>
 <p align=""> 10- Collect all package.json file to check Dependency confusion </p>
 <p align=""> 11- Collect all Shodan IPs and Scan them </p>
