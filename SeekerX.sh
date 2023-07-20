@@ -236,7 +236,7 @@ function subdomainsScan {
     subfinder -silent -d $1 -o $outputdir/$projectname/$1/recon/subdomains/subfinder.txt 
     if [ "$mode" == "deep" ]
     then
-      cat $outputdir/$projectname/$1/recon/subdomains/* | sort -u > $outputdir/$projectname/$1/recon/subdomains/tmp.txt
+      cat $outputdir/$projectname/$1/recon/subdomains/*.txt.txt | sort -u > $outputdir/$projectname/$1/recon/subdomains/tmp.txt
       subfinder -dL $outputdir/$projectname/$1/recon/subdomains/tmp.txt -silent -o $outputdir/$projectname/$1/recon/subdomains/subfinder_recursive.txt
       rm $outputdir/$projectname/$1/recon/subdomains/tmp.txt
     fi
@@ -247,7 +247,7 @@ function subdomainsScan {
 
   #---------------------------------------------- collect all -----------------------------#
   
-  cat $outputdir/$projectname/$1/recon/subdomains/* | sort -u > $outputdir/$projectname/$1/recon/subdomains/all_subs.txt
+  cat $outputdir/$projectname/$1/recon/subdomains/*.txt | sort -u > $outputdir/$projectname/$1/recon/subdomains/all_subs.txt
   echo -e "${GREEN}[+] Found $(wc -l $outputdir/$projectname/$1/recon/subdomains/all_subs.txt | cut -f 1 -d " " ) subdomains for $1 ${NC}"
   echo -e "${GREEN}[+] All subdomains can be found in $outputdir/$projectname/$1/recon/subdomains/all_subs.txt"
 
@@ -284,7 +284,7 @@ function endpointsScan {
   if [ -x "$(command -v gau)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.gau ]
   then
     echo -e "${GREEN}[+] gau Started on $1${NC}"
-    cat $outputdir/$projectname/$1/recon/subdomains/* | sort -u | gau --providers gau,otx,urlscan --subs | sort -u > $outputdir/$projectname/$1/recon/endpoints/gau.txt
+    cat $outputdir/$projectname/$1/recon/subdomains/*.txt | sort -u | gau --providers gau,otx,urlscan --subs | sort -u > $outputdir/$projectname/$1/recon/endpoints/gau.txt
     touch $outputdir/$projectname/$1/.progress/.gau
   fi
 
@@ -292,11 +292,11 @@ function endpointsScan {
   if [ -x "$(command -v waybackurls)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.waybackurls ]
   then
     echo -e "${GREEN}[+] wayabackurls Started on $1${NC}"
-    cat $outputdir/$projectname/$1/recon/subdomains/* | sort -u | waybackurls > $outputdir/$projectname/$1/recon/endpoints/waybackurls.txt
+    cat $outputdir/$projectname/$1/recon/subdomains/*.txt | sort -u | waybackurls > $outputdir/$projectname/$1/recon/endpoints/waybackurls.txt
     touch $outputdir/$projectname/$1/.progress/.waybackurls
   fi 
 
-  cat $outputdir/$projectname/$1/recon/endpoints/* | cut -f3 -d / | sort -u > $outputdir/$projectname/$1/recon/subdomains/endpoints_subs.txt
+  cat $outputdir/$projectname/$1/recon/endpoints/*.txt | cut -f3 -d / | sort -u > $outputdir/$projectname/$1/recon/subdomains/endpoints_subs.txt
 
 }
 
@@ -321,8 +321,8 @@ function endpointsFuzzing {
 #------------------------------------------ js collect ----------------------------------------------#
     echo -e "${GREEN}[+] Start Collect Javascript files${NC}"
     mkdir -p $outputdir/$projectname/$1/recon/endpoints/js
-    # if get an error edit it to cat $outputdir/$projectname/$1/recon/endpoints/*
-    cat $outputdir/$projectname/$1/recon/endpoints/* | grep "\.js$"| cut -d '?' -f 1 >> $outputdir/$projectname/$1/recon/endpoints/js/endpoints_js.txt
+    # if get an error edit it to cat $outputdir/$projectname/$1/recon/endpoints/*.txt
+    cat $outputdir/$projectname/$1/recon/endpoints/*.txt | grep "\.js$"| cut -d '?' -f 1 >> $outputdir/$projectname/$1/recon/endpoints/js/endpoints_js.txt
     
     if [ -x "$(command -v gospider)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.gospider ]
     then       
@@ -353,7 +353,7 @@ function endpointsFuzzing {
  
  echo -e "${GREEN}[+] Start parameters Collecting ${NC}"
  
- cat $outputdir/$projectname/$1/recon/endpoints/*.txt | cut -d "?" -f1 | sort -u > $outputdir/$projectname/$1/recon/endpoints/all_endpoints.txt
+ cat $outputdir/$projectname/$1/recon/endpoints/*.txt.txt | cut -d "?" -f1 | sort -u > $outputdir/$projectname/$1/recon/endpoints/all_endpoints.txt
  mkdir -p $outputdir/$projectname/$1/recon/endpoints/param_fuzzing
  if [ -x "$(command -v arjun)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.arjun ]
    then
