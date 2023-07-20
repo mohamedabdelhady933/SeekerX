@@ -233,6 +233,17 @@ else
 	cp /root/go/bin/gf /usr/local/bin/
 fi
 
+# Seclist
+
+if  [ -d "/usr/share/seclists" ]
+then
+	echo "[+] Seclists already installed";
+else 
+	apt install seclists
+fi
+
+
+
 awk '!seen[$0]++' config.conf > tmp
 mv tmp config.conf
 
