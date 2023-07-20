@@ -353,7 +353,7 @@ function endpointsFuzzing {
  
  echo -e "${GREEN}[+] Start parameters Collecting ${NC}"
  
- cat $outputdir/$projectname/$1/recon/endpoints/*.txt.txt | cut -d "?" -f1 | sort -u > $outputdir/$projectname/$1/recon/endpoints/all_endpoints.txt
+ cat $outputdir/$projectname/$1/recon/endpoints/*.txt | cut -d "?" -f1 | sort -u > $outputdir/$projectname/$1/recon/endpoints/all_endpoints.txt
  mkdir -p $outputdir/$projectname/$1/recon/endpoints/param_fuzzing
  if [ -x "$(command -v arjun)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.arjun ]
    then
