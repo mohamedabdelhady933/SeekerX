@@ -236,7 +236,7 @@ function subdomainsScan {
     subfinder -silent -d $1 -o $outputdir/$projectname/$1/recon/subdomains/subfinder.txt 
     if [ "$mode" == "deep" ]
     then
-      cat $outputdir/$projectname/$1/recon/subdomains/*.txt.txt | sort -u > $outputdir/$projectname/$1/recon/subdomains/tmp.txt
+      cat $outputdir/$projectname/$1/recon/subdomains/*.txt | sort -u > $outputdir/$projectname/$1/recon/subdomains/tmp.txt
       subfinder -dL $outputdir/$projectname/$1/recon/subdomains/tmp.txt -silent -o $outputdir/$projectname/$1/recon/subdomains/subfinder_recursive.txt
       rm $outputdir/$projectname/$1/recon/subdomains/tmp.txt
     fi
