@@ -353,13 +353,15 @@ function endpointsFuzzing {
  
  echo -e "${GREEN}[+] Start parameters Collecting ${NC}"
  
- cat $outputdir/$projectname/$1/recon/endpoints/*.txt | cut -d "?" -f1 | sort -u > $outputdir/$projectname/$1/recon/endpoints/all_endpoints.txt
+
  mkdir -p $outputdir/$projectname/$1/recon/endpoints/param_fuzzing
- if [ -x "$(command -v arjun)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.arjun ]
-   then
-   arjun -i  $outputdir/$projectname/$1/recon/endpoints/all_endpoints.txt -o $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/arjun.json
-   touch $outputdir/$projectname/$1/.progress/.arjun
-   fi
+cat $outputdir/$projectname/$1/recon/endpoints/*.txt | sort -u > $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/static_params.txt
+ # if [ -x "$(command -v arjun)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.arjun ]
+ #   then
+ #   arjun -i  $outputdir/$projectname/$1/recon/endpoints/all_endpoints.txt -o $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/arjun.json
+   
+ #   touch $outputdir/$projectname/$1/.progress/.arjun
+ #   fi
 
  #----------------------------------- XSS Scan--------------------------------------------#
  
@@ -367,7 +369,7 @@ function endpointsFuzzing {
     then
     
       echo -e "${GREEN}[+] Collect possible XSS ${NC}"
-      cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/all_params.txt | kxss >> $outputdir/$projectname/$1/vuln/kxss.txt
+      cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/*.txt | kxss >> $outputdir/$projectname/$1/vuln/kxss.txt
       touch $outputdir/$projectname/$1/.progress/.kxss
     fi
 #----------------------------------- SSRF Scan--------------------------------------#
@@ -376,7 +378,7 @@ function endpointsFuzzing {
   then
     echo -e "${GREEN}[+] Collect possible SSRF${NC}"
     
-    cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/all_params.txt | sort -u  | gf ssrf | tee -a $outputdir/$projectname/$1/vuln/ssrf-possible.txt
+    cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/*.txt | sort -u  | gf ssrf | tee -a $outputdir/$projectname/$1/vuln/ssrf-possible.txt
     touch $outputdir/$projectname/$1/.progress/.ssrf-possible
   
   fi
@@ -386,7 +388,7 @@ function endpointsFuzzing {
   if [ -x "$(command -v gf)" ] && [ -f ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.lfi-possible ]
   then
     echo -e "${GREEN}[+] Collect possible LFI${NC}"
-    cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/all_params.txt | sort -u  | gf lfi | tee -a $outputdir/$projectname/$1/vuln/lfi-possible.txt
+    cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/*.txt | sort -u  | gf lfi | tee -a $outputdir/$projectname/$1/vuln/lfi-possible.txt
     touch $outputdir/$projectname/$1/.progress/.lfi-possible
   
   fi
