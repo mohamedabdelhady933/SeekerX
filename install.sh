@@ -34,6 +34,18 @@ cd tools
 
 git clone https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan.git
 chmod +x Fast-Google-Dorks-Scan/FGDS.sh
+
+# Seclist
+
+if  [ -d "/usr/share/seclists" ]
+then
+	echo "[+] Seclists already installed";
+else 
+	git clone https://github.com/danielmiessler/SecLists.git
+ 	mv SecLists /usr/share/
+fi
+
+
 	# # ParamSpider
 	# git clone https://github.com/devanshbatham/ParamSpider
 	# pip3 install -r ParamSpider/requirements.txt 
@@ -233,14 +245,7 @@ else
 	cp /root/go/bin/gf /usr/local/bin/
 fi
 
-# Seclist
 
-if  [ -d "/usr/share/seclists" ]
-then
-	echo "[+] Seclists already installed";
-else 
-	apt install seclists
-fi
 
 
 
