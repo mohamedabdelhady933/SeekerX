@@ -175,8 +175,9 @@ then
 else 
 	go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 	cp /root/go/bin/nuclei /usr/local/bin/
- 	nuclei ./CustomNucleiTemplates ~/nuclei-templates
-  	mv 
+ 	nuclei
+  	mv ./CustomNucleiTemplates ~/nuclei-templates
+  	
 fi
 
 # gospider
