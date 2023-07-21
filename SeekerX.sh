@@ -367,10 +367,10 @@ cat $outputdir/$projectname/$1/recon/endpoints/*.txt | sort -u > $outputdir/$pro
  
  if [ -x "$(command -v kxss)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.kxss ]
     then
-    
-      echo -e "${GREEN}[+] Collect possible XSS ${NC}"
-      cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/*.txt | kxss >> $outputdir/$projectname/$1/vuln/kxss.txt
-      touch $outputdir/$projectname/$1/.progress/.kxss
+      	mkdir -p $outputdir/$projectname/$1/vuln/
+	echo -e "${GREEN}[+] Collect possible XSS ${NC}"
+      	cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/*.txt | kxss >> $outputdir/$projectname/$1/vuln/kxss.txt
+      	touch $outputdir/$projectname/$1/.progress/.kxss
     fi
 #----------------------------------- SSRF Scan--------------------------------------#
   
