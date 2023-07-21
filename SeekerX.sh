@@ -365,13 +365,13 @@ cat $outputdir/$projectname/$1/recon/endpoints/*.txt | sort -u > $outputdir/$pro
 
  #----------------------------------- XSS Scan--------------------------------------------#
  
- if [ -x "$(command -v kxss)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.kxss ]
-    then
+if [ -x "$(command -v kxss)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.kxss ]
+then
       	mkdir -p $outputdir/$projectname/$1/vuln/
 	echo -e "${GREEN}[+] Collect possible XSS ${NC}"
       	cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/*.txt | kxss >> $outputdir/$projectname/$1/vuln/kxss.txt
       	touch $outputdir/$projectname/$1/.progress/.kxss
-    fi
+fi
 #----------------------------------- SSRF Scan--------------------------------------#
   
   if [ -x "$(command -v gf)" ] && [ -x "$(command -v waybackurls)" ] && [ -f ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.ssrf-possible ]
@@ -536,9 +536,12 @@ then
   current_dir=$(pwd)
   cd $SEEKERX_HOME/tools/joomscan
   perl joomscan.pl -m $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt -ec
+  if [ -d "./reports"]
+  then
   mkdir $outputdir/$projectname/$1/vuln/joomla
   #edit done
   mv ./reports/*.$1/*.txt $outputdir/$projectname/$1/vuln/joomla
+  fi
   cd $current_dir
   touch $outputdir/$projectname/$1/.progress/.joomla_scan
 fi
