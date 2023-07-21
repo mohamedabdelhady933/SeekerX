@@ -695,5 +695,7 @@ while read -r domain; do
   scan "$domain"
 done < $domainfile
 
-# find $outputdir -type f -empty -print
-# find $outputdir -type d -empty -exec rmdir {} \;
+find $outputdir/$projectname/*/recon -type f -empty -delete 2>/dev/null
+find $outputdir/$projectname/*/vuln -type f -empty -delete 2>/dev/null
+find $outputdir/$projectname/*/vuln -type d -empty -exec rmdir {} \; 2>/dev/null
+find $outputdir/$projectname/*/recon -type d -empty -exec rmdir {} \; 2>/dev/null
