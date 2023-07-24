@@ -90,11 +90,11 @@ function checkForTools {
       echo -e "${RED}[-] Download it with 'go install github.com/lc/gau/v2/cmd/gau@latest'${NC}\n"
     fi
 
-  if ! [ -x "$(command -v waybackurls)" ]
-    then 
-      echo -e "\n${RED}[-]---------- waybackurls not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it with 'go install -v github.com/tomnomnom/waybackurls@latest'${NC}\n"
-    fi
+  # if ! [ -x "$(command -v waybackurls)" ]
+  #   then 
+  #     echo -e "\n${RED}[-]---------- waybackurls not found ----------[-]${NC}"
+  #     echo -e "${RED}[-] Download it with 'go install -v github.com/tomnomnom/waybackurls@latest'${NC}\n"
+  #   fi
 
   if ! [ -x "$(command -v httpx)" ]
     then 
@@ -289,12 +289,12 @@ function endpointsScan {
   fi
 
   #------------------------------------------ waybackurls ----------------------------------------------#
-  if [ -x "$(command -v waybackurls)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.waybackurls ]
-  then
-    echo -e "${GREEN}[+] wayabackurls Started on $1${NC}"
-    cat $outputdir/$projectname/$1/recon/subdomains/*.txt | sort -u | waybackurls > $outputdir/$projectname/$1/recon/endpoints/waybackurls.txt
-    touch $outputdir/$projectname/$1/.progress/.waybackurls
-  fi 
+  # if [ -x "$(command -v waybackurls)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.waybackurls ]
+  # then
+  #   echo -e "${GREEN}[+] wayabackurls Started on $1${NC}"
+  #   cat $outputdir/$projectname/$1/recon/subdomains/*.txt | sort -u | waybackurls > $outputdir/$projectname/$1/recon/endpoints/waybackurls.txt
+  #   touch $outputdir/$projectname/$1/.progress/.waybackurls
+  # fi 
 
   cat $outputdir/$projectname/$1/recon/endpoints/*.txt | cut -f3 -d / | sort -u > $outputdir/$projectname/$1/recon/subdomains/endpoints_subs.txt
 
@@ -376,7 +376,7 @@ then
 fi
 #----------------------------------- SSRF Scan--------------------------------------#
   
-  if [ -x "$(command -v gf)" ] && [ -x "$(command -v waybackurls)" ] && [ -f ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.ssrf-possible ]
+  if [ -x "$(command -v gf)" ] && [ -x "$(command -v gau)" ] && [ -f ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.ssrf-possible ]
   then
     echo -e "${GREEN}[+] Collect possible SSRF${NC}"
     
