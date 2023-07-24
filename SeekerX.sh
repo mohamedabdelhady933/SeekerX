@@ -242,21 +242,22 @@ function subdomainsScan {
     fi
     touch $outputdir/$projectname/$1/.progress/.subfinder
   fi
-
+  clear
+  banner
   endpointsScan $1
 
   #---------------------------------------------- collect all -----------------------------#
   
   cat $outputdir/$projectname/$1/recon/subdomains/*.txt | sort -u > $outputdir/$projectname/$1/recon/subdomains/all_subs.txt
-  echo -e "${GREEN}[+] Found $(wc -l $outputdir/$projectname/$1/recon/subdomains/all_subs.txt | cut -f 1 -d " " ) subdomains for $1 ${NC}"
-  echo -e "${GREEN}[+] All subdomains can be found in $outputdir/$projectname/$1/recon/subdomains/all_subs.txt"
+  echo -e "\n${GREEN}[+] Found $(wc -l $outputdir/$projectname/$1/recon/subdomains/all_subs.txt | cut -f 1 -d " " ) subdomains for $1 ${NC}\n"
+  echo -e "\n${GREEN}[+] All subdomains can be found in $outputdir/$projectname/$1/recon/subdomains/all_subs.txt \n"
 
 
   #------------------------------------------- httpx --------------------------------------------------#
   
   if [ -x "$(command -v httpx)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.httpx ]
   then
-    echo -e "${GREEN}[+] httpx Started on $1${NC}" 
+    echo -e "\n${GREEN}[+] httpx Started on $1${NC}" 
     if [ "$mode" == "deep" ]
     then
       HTTP_PORTS=$DEEP_MODE_HTTP_PORTS
@@ -272,18 +273,19 @@ function subdomainTakeoverScan {
   if [ -x "$(command -v subzy)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.subzy ]
   then
     mkdir -p $outputdir/$projectname/$1/vuln/takeover 
-    echo -e "${GREEN}[+] subzy Started on $1${NC}"
+    echo -e "\n${GREEN}[+] subzy Started on $1${NC}"
     subzy run --hide_fails --vuln --targets $outputdir/$projectname/$1/recon/subdomains/all_subs.txt --output $outputdir/$projectname/$1/vuln/takeover/subzy.json
     touch $outputdir/$projectname/$1/.progress/.subzy
   fi
 }
 
 function endpointsScan {
-  mkdir -p $outputdir/$projectname/$1/recon/endpoints 
+   
   #------------------------------------------ gau ----------------------------------------------#
   if [ -x "$(command -v gau)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.gau ]
   then
-    echo -e "${GREEN}[+] gau Started on $1${NC}"
+    mkdir -p $outputdir/$projectname/$1/recon/endpoints
+    echo -e "\n${GREEN}[+] gau Started on $1${NC}\n"
     cat $outputdir/$projectname/$1/recon/subdomains/*.txt | sort -u | gau --providers gau,otx,urlscan --subs | sort -u > $outputdir/$projectname/$1/recon/endpoints/gau.txt
     touch $outputdir/$projectname/$1/.progress/.gau
   fi
@@ -357,7 +359,15 @@ function endpointsFuzzing {
  
 
  mkdir -p $outputdir/$projectname/$1/recon/endpoints/param_fuzzing
-cat $outputdir/$projectname/$1/recon/endpoints/*.txt | sort -u > $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/static_params.txt
+cat $outputdir/$projectname/$1/recon/endpoints/*.txt | sort -u | grep "?" > $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/static_params.txt
+
+if [ -x "$(command -v gospider)" ] && ! [ -f $outputdir/$projectname/$1/recon/subdomains/all_subs.txt ]
+    then       
+      gospider -S $outputdir/$projectname/$1/recon/subdomains/all_subs.txt | grep $1 | grep "?" >> $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/gospider_params.txt
+    fi
+
+# Arjun Tooooooo slow
+
  # if [ -x "$(command -v arjun)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.arjun ]
  #   then
  #   arjun -i  $outputdir/$projectname/$1/recon/endpoints/all_endpoints.txt -o $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/arjun.json
