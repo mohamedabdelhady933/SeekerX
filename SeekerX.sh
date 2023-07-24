@@ -121,11 +121,11 @@ function checkForTools {
   #     echo -e "${RED}[-] Download it by 'pip3 install dirsearch'${NC}"
   #   fi
 
-  if ! [ -x "$(command -v arjun)" ]
-    then
-      echo -e "\n${RED}[-]---------- arjun not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it by 'pip3 install arjun'${NC}\n"
-    fi
+  # if ! [ -x "$(command -v arjun)" ]
+  #   then
+  #     echo -e "\n${RED}[-]---------- arjun not found ----------[-]${NC}"
+  #     echo -e "${RED}[-] Download it by 'pip3 install arjun'${NC}\n"
+  #   fi
 
   if ! [ -f $SEEKERX_HOME/tools/wpconfig-checker.py ]
     then
