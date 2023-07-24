@@ -251,13 +251,14 @@ function subdomainsScan {
   cat $outputdir/$projectname/$1/recon/subdomains/*.txt | sort -u > $outputdir/$projectname/$1/recon/subdomains/all_subs.txt
   echo -e "\n${GREEN}[+] Found $(wc -l $outputdir/$projectname/$1/recon/subdomains/all_subs.txt | cut -f 1 -d " " ) subdomains for $1 ${NC}\n"
   echo -e "\n${GREEN}[+] All subdomains can be found in $outputdir/$projectname/$1/recon/subdomains/all_subs.txt \n"
-
+  sleep 3
+  clear
 
   #------------------------------------------- httpx --------------------------------------------------#
   
   if [ -x "$(command -v httpx)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.httpx ]
   then
-    echo -e "\n${GREEN}[+] httpx Started on $1${NC}" 
+    echo -e "\n${GREEN}[+] httpx Started on $1${NC}\n" 
     if [ "$mode" == "deep" ]
     then
       HTTP_PORTS=$DEEP_MODE_HTTP_PORTS
@@ -273,7 +274,7 @@ function subdomainTakeoverScan {
   if [ -x "$(command -v subzy)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.subzy ]
   then
     mkdir -p $outputdir/$projectname/$1/vuln/takeover 
-    echo -e "\n${GREEN}[+] subzy Started on $1${NC}"
+    echo -e "\n${GREEN}[+] Subzy Started on $1${NC}\n"
     subzy run --hide_fails --vuln --targets $outputdir/$projectname/$1/recon/subdomains/all_subs.txt --output $outputdir/$projectname/$1/vuln/takeover/subzy.json
     touch $outputdir/$projectname/$1/.progress/.subzy
   fi
@@ -321,8 +322,10 @@ function endpointsFuzzing {
   # fi
 
 #------------------------------------------ js collect ----------------------------------------------#
- #if [-f "$outputdir/$projectname/$1/recon/endpoints/*.txt"]
- # then
+
+ if [-f "$outputdir/$projectname/$1/recon/endpoints/*.txt"]
+ then
+    
     echo -e "${GREEN}[+] Start Collect Javascript files${NC}"
     mkdir -p $outputdir/$projectname/$1/recon/endpoints/js
     # if get an error edit it to cat $outputdir/$projectname/$1/recon/endpoints/*.txt
@@ -336,7 +339,7 @@ function endpointsFuzzing {
     fi
 
   cat $outputdir/$projectname/$1/recon/endpoints/js/* | sort -u | httpx -silent -mc 200  >> $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt
- # fi
+ fi
   #------------------------------------------ JS leaks Scan  ------------------------------------------------------
   
   if [ -x "$(command -v python3)" ] &&  [ -f $SEEKERX_HOME/tools/JS-Leaks.py ] &&  [ -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.js_leak ]
