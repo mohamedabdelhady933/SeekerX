@@ -319,6 +319,8 @@ function endpointsFuzzing {
   # fi
 
 #------------------------------------------ js collect ----------------------------------------------#
+ #if [-f "$outputdir/$projectname/$1/recon/endpoints/*.txt"]
+ # then
     echo -e "${GREEN}[+] Start Collect Javascript files${NC}"
     mkdir -p $outputdir/$projectname/$1/recon/endpoints/js
     # if get an error edit it to cat $outputdir/$projectname/$1/recon/endpoints/*.txt
@@ -332,7 +334,7 @@ function endpointsFuzzing {
     fi
 
   cat $outputdir/$projectname/$1/recon/endpoints/js/* | sort -u | httpx -silent -mc 200  >> $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt
-
+ # fi
   #------------------------------------------ JS leaks Scan  ------------------------------------------------------
   
   if [ -x "$(command -v python3)" ] &&  [ -f $SEEKERX_HOME/tools/JS-Leaks.py ] &&  [ -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.js_leak ]
