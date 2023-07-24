@@ -538,7 +538,6 @@ fi
 if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.joomla_detect ]
 then
   echo -e "${GREEN}[+] Start Collect Joomla Subdomains ${NC}"
-  
   mkdir $outputdir/$projectname/$1/recon/joomla
   cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep | grep "\[*joomla*\]"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt  
  touch $outputdir/$projectname/$1/.progress/.joomla_detect
