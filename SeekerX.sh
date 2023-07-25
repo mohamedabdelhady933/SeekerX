@@ -389,7 +389,7 @@ then
 fi
 #----------------------------------- SSRF Scan--------------------------------------#
   
-  if [ -x "$(command -v gf)" ] && [ -x "$(command -v gau)" ] && [ -f ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.ssrf-possible ]
+  if [ -x "$(command -v gf)" ] && [ -x "$(command -v gau)" ] && [ -d ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.ssrf-possible ]
   then
     echo -e "${GREEN}[+] Collect possible SSRF${NC}"
     
@@ -400,7 +400,7 @@ fi
 
 #-------------------------------------------- LFI Scan------------------------------------------#
   
-  if [ -x "$(command -v gf)" ] && [ -f ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.lfi-possible ]
+  if [ -x "$(command -v gf)" ] && [ -d ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.lfi-possible ]
   then
     echo -e "${GREEN}[+] Collect possible LFI${NC}"
     cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/*.txt | sort -u  | gf lfi | tee -a $outputdir/$projectname/$1/vuln/lfi-possible.txt
