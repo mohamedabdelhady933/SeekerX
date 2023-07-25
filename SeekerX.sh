@@ -505,7 +505,7 @@ fi
   then
     echo -e "${GREEN}[+] Scanning Wordpress Subdomains ${NC}"
 
-    if [ $WordPress_Api != "" ]
+    if ! [ $WordPress_Api = "" ]
     then
       python3 $SEEKERX_HOME/tools/wpconfig-checker.py  -a $WordPress_Api -f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt >> $outputdir/$projectname/$1/vuln/wordpress.txt
     else
