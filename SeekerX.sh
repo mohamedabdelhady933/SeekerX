@@ -358,7 +358,7 @@ function endpointsFuzzing {
   
  #------------------------------------------ Parameter scan ----------------------------------------------#
  
- echo -e "${GREEN}[+] Start parameters Collecting ${NC}"
+ echo -e "\n${GREEN}[+] Start parameters Collecting ${NC}\n"
  
 
  mkdir -p $outputdir/$projectname/$1/recon/endpoints/param_fuzzing
@@ -383,7 +383,7 @@ if [ -x "$(command -v gospider)" ] && ! [ -f $outputdir/$projectname/$1/recon/su
 if [ -x "$(command -v kxss)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.kxss ]
 then
       	mkdir -p $outputdir/$projectname/$1/vuln/
-	echo -e "${GREEN}[+] Collect possible XSS ${NC}"
+	echo -e "\n${GREEN}[+] Collect possible XSS ${NC}\n"
       	cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/*.txt | kxss >> $outputdir/$projectname/$1/vuln/kxss.txt
       	touch $outputdir/$projectname/$1/.progress/.kxss
 fi
@@ -391,7 +391,7 @@ fi
   
   if [ -x "$(command -v gf)" ] && [ -x "$(command -v gau)" ] && [ -d ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.ssrf-possible ]
   then
-    echo -e "${GREEN}[+] Collect possible SSRF${NC}"
+    echo -e "\n${GREEN}[+] Collect possible SSRF${NC}\n"
     
     cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/*.txt | sort -u  | gf ssrf | tee -a $outputdir/$projectname/$1/vuln/ssrf-possible.txt
     touch $outputdir/$projectname/$1/.progress/.ssrf-possible
@@ -402,7 +402,7 @@ fi
   
   if [ -x "$(command -v gf)" ] && [ -d ~/.gf ] && ! [ -f $outputdir/$projectname/$1/.progress/.lfi-possible ]
   then
-    echo -e "${GREEN}[+] Collect possible LFI${NC}"
+    echo -e "\n${GREEN}[+] Collect possible LFI${NC}\n"
     cat $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/*.txt | sort -u  | gf lfi | tee -a $outputdir/$projectname/$1/vuln/lfi-possible.txt
     touch $outputdir/$projectname/$1/.progress/.lfi-possible
   
@@ -412,7 +412,7 @@ fi
   
   if [ -f $SEEKERX_HOME/tools/Fast-Google-Dorks-Scan/FGDS.sh ] && ! [ -f $outputdir/$projectname/$1/.progress/.google-dorks ]
   then 
-    echo -e "${GREEN}[+] Scan for Google Dorks ${NC}"
+    echo -e "\n${GREEN}[+] Scan for Google Dorks ${NC}\n"
     mkdir $outputdir/$projectname/$1/recon/Dorks
     bash $SEEKERX_HOME/tools/Fast-Google-Dorks-Scan/FGDS.sh $1 >> $outputdir/$projectname/$1/recon/Dorks/google_dorks.txt
     touch $outputdir/$projectname/$1/.progress/.google-dorks
@@ -422,7 +422,7 @@ fi
   if [ -x "$(command gitdorks_go)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.git-dorks]
   then
     if [ "$mode" = "deep" ]; then
-        echo -e "${GREEN}[+] Scan for Github Dorks ${NC}"
+        echo -e "\n${GREEN}[+] Scan for Github Dorks ${NC}\n"
 				gitdorks_go -gd $$SEEKERX_HOME/tools/gitdorks_go/Dorks/medium_dorks.txt -nws 20 -target "$domain" -tf "${GITHUB_TOKENS}" -ew 3 | anew -q $outputdir/$projectname/$1/recon/Dorks/git_dorks.txt
 			else
 				gitdorks_go -gd $$SEEKERX_HOME/tools/gitdorks_go/Dorks/smalldorks.txt -nws 20 -target $domain -tf "${GITHUB_TOKENS}" -ew 3 | anew -q $outputdir/$projectname/$1/recon/Dorks/git_dorks.txt
@@ -447,7 +447,7 @@ function checkForVulns {
 
   if [ -x "$(command -v httpx)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.dependency_paths ]
     then
-      printf "${GREEN}[+]  Try to find package.json ${NC}";
+      printf "\n${GREEN}[+]  Try to find package.json ${NC}\n";
       
       cat $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt | httpx -silent -path /package.json -mc 200 -o $outputdir/$projectname/$1/recon/endpoints/dependency_paths.txt
       touch $outputdir/$projectname/$1/.progress/.dependency_paths
