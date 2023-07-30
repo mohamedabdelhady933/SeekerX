@@ -413,7 +413,7 @@ fi
   if [ -f $SEEKERX_HOME/tools/Fast-Google-Dorks-Scan/FGDS.sh ] && ! [ -f $outputdir/$projectname/$1/.progress/.google-dorks ]
   then 
     echo -e "\n${GREEN}[+] Scan for Google Dorks ${NC}\n"
-    mkdir $outputdir/$projectname/$1/recon/Dorks
+    mkdir -p $outputdir/$projectname/$1/recon/Dorks
     bash $SEEKERX_HOME/tools/Fast-Google-Dorks-Scan/FGDS.sh $1 >> $outputdir/$projectname/$1/recon/Dorks/google_dorks.txt
     touch $outputdir/$projectname/$1/.progress/.google-dorks
   fi
