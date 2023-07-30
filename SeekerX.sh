@@ -323,7 +323,7 @@ function endpointsFuzzing {
 
 #------------------------------------------ js collect ----------------------------------------------#
 
- if [-f "$outputdir/$projectname/$1/recon/endpoints/*.txt"]
+ if [ -f "$outputdir/$projectname/$1/recon/endpoints/*.txt" ]
  then
     
     echo -e "${GREEN}[+] Start Collect Javascript files${NC}"
