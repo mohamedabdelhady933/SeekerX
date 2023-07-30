@@ -157,6 +157,19 @@ else
 fi
 
 
+# Gf-Patterns
+
+if  [ -d "~/.gf" ]
+then
+	echo "[+] Gf-Patterns already installed";
+else 
+	git clone https://github.com/1ndianl33t/Gf-Patterns
+ 	mkdir  ~/.gf
+	mv Gf-Patterns/*.json ~/.gf
+ 	rm -fr Gf-Patterns/
+fi
+
+
 #confused
 # if  [ -x "$(command -v confused)" ]
 # then
