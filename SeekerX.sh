@@ -200,7 +200,7 @@ function subdomainsScan {
   #------------------------------------------- assetfinder --------------------------------------------------#
   if [ -x "$(command -v assetfinder)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.assetfinder ]
   then
-    echo -e "${GREEN}[+] assetfinder Started on $1${NC}"
+    echo -e "\n${GREEN}[+] assetfinder Started on $1${NC}\n"
     assetfinder --subs-only $1 >> $outputdir/$projectname/$1/recon/subdomains/assetfinder.txt 
     touch $outputdir/$projectname/$1/.progress/.assetfinder
   fi
@@ -232,7 +232,7 @@ function subdomainsScan {
   #------------------------------------------ Subfinder ----------------------------------------------#
   if [ -x "$(command -v subfinder)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.subfinder ]
   then
-    echo -e "${GREEN}[+] subfinder Started on $1${NC}"
+    echo -e "\n${GREEN}[+] subfinder Started on $1${NC}\n"
     subfinder -silent -d $1 -o $outputdir/$projectname/$1/recon/subdomains/subfinder.txt 
     if [ "$mode" == "deep" ]
     then
