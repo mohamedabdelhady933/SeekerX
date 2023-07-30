@@ -419,16 +419,17 @@ fi
   fi
 
   #----------------------------------- Github Dorks-----------------------------------------------#
-  if [ -x "$(command gitdorks_go)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.git-dorks]
-  then
-    if [ "$mode" = "deep" ]; then
-        echo -e "\n${GREEN}[+] Scan for Github Dorks ${NC}\n"
-				gitdorks_go -gd $$SEEKERX_HOME/tools/gitdorks_go/Dorks/medium_dorks.txt -nws 20 -target "$domain" -tf "${GITHUB_TOKENS}" -ew 3 | anew -q $outputdir/$projectname/$1/recon/Dorks/git_dorks.txt
-			else
-				gitdorks_go -gd $$SEEKERX_HOME/tools/gitdorks_go/Dorks/smalldorks.txt -nws 20 -target $domain -tf "${GITHUB_TOKENS}" -ew 3 | anew -q $outputdir/$projectname/$1/recon/Dorks/git_dorks.txt
-			fi
-   touch $outputdir/$projectname/$1/.progress/.git-dorks
-  fi
+  # Need to edit
+  # if [ -x "$(command gitdorks_go)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.git-dorks] && [ "$GITHUB_TOKENS" != ""]
+  # then
+  #   if [ "$mode" = "deep" ]; then
+  #       echo -e "\n${GREEN}[+] Scan for Github Dorks ${NC}\n"
+		# 		gitdorks_go -gd $$SEEKERX_HOME/tools/gitdorks_go/Dorks/medium_dorks.txt -nws 20 -target "$domain" -tf "${GITHUB_TOKENS}" -ew 3 | anew -q $outputdir/$projectname/$1/recon/Dorks/git_dorks.txt
+		# 	else
+		# 		gitdorks_go -gd $$SEEKERX_HOME/tools/gitdorks_go/Dorks/smalldorks.txt -nws 20 -target $domain -tf "${GITHUB_TOKENS}" -ew 3 | anew -q $outputdir/$projectname/$1/recon/Dorks/git_dorks.txt
+		# 	fi
+  #  touch $outputdir/$projectname/$1/.progress/.git-dorks
+  # fi
 
   
 }
