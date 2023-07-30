@@ -501,7 +501,7 @@ fi
     fi
 #----------------------------------- Scan Wordpress -----------------------------------------------#
 
-  if [ -f $SEEKERX_HOME/tools/wpconfig-checker.py ] && [ -x "$(command -v wpscan)" ] && [ -x "$(command -v python)" ]  &&  [ -f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.wordpress_scan ]
+  if [ -f $SEEKERX_HOME/tools/wpconfig-checker.py ] && [ -x "$(command -v wpscan)" ] && [ -x "$(command -v python)" ]  &&  [ -f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt ] && ! [ ! -s "$outputdir/$projectname/$1/vuln/nuclei.txt" ] && ! [ -f $outputdir/$projectname/$1/.progress/.wordpress_scan ]
   then
     echo -e "${GREEN}[+] Scanning Wordpress Subdomains ${NC}"
 
@@ -515,7 +515,7 @@ fi
   fi
 #-----------------------------------drupal Detect-----------------------------------------------#
 
-if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_detect ]
+if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_detect ] && ! [ ! -s "$outputdir/$projectname/$1/vuln/nuclei.txt" ]
 then
   echo -e "${GREEN}[+] Start Collect Drupal Subdomains ${NC}"
   mkdir $outputdir/$projectname/$1/recon/drupal
@@ -524,18 +524,18 @@ then
  fi
 #-----------------------------------drupal scan-----------------------------------------------#
 
-if [ -f  $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_scan ]
+if [ -f  $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_scan ] && ! [ ! -s "$outputdir/$projectname/$1/vuln/nuclei.txt" ]
 then
   echo -e "${GREEN}[+] Scanning drupal Subdomains ${NC}"
   current_dir=$(pwd)
   cd $SEEKERX_HOME/tools/droopescan
-  python3 droopescan scan drupal -U $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt -t 32 -e a >> $outputdir/$projectname/$1/vuln/drupal.txt
+  python3 droopescan scan drupal -U $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt -t 32 -e a >> $outputdir/$projectname/$1/vuln/drupal.txt 
   cd $current_dir  
   touch $outputdir/$projectname/$1/.progress/.drupal_scan
 fi
 
 #-----------------------------------joomla Detect-----------------------------------------------#
-if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.joomla_detect ]
+if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.joomla_detect ]  && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_scan ]
 then
   echo -e "${GREEN}[+] Start Collect Joomla Subdomains ${NC}"
   mkdir $outputdir/$projectname/$1/recon/joomla
@@ -544,7 +544,7 @@ then
  fi
 #-----------------------------------joomla scan-----------------------------------------------#
 
-if [ -f  $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.joomla_scan ] && [ -f $SEEKERX_HOME/tools/joomscan/joomscan.pl ]
+if [ -f  $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.joomla_scan ] && [ -f $SEEKERX_HOME/tools/joomscan/joomscan.pl ]  && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_scan ]
 then
   echo -e "${GREEN}[+] Scanning Joomla Subdomains ${NC}"
   current_dir=$(pwd)
@@ -587,7 +587,7 @@ then
 fi
 #-----------------------------------Cpanel Detect-----------------------------------------------#
 
-if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.Cpanel_detect ]
+if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.Cpanel_detect ]  && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_scan ]
 then
   echo -e "${GREEN}[+] Collect Cpanel Subdomains ${NC}"
   
@@ -628,7 +628,7 @@ fi
 
 
 # ------------------------------------Grafana Detect-----------------------------------------------------
-if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.Grafana_detect ]
+if [ -f $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.Grafana_detect ]  && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_scan ]
 then
   echo -e "${GREEN}[+] Collect Grafana Subdomains ${NC}"
   mkdir $outputdir/$projectname/$1/recon/Grafana
