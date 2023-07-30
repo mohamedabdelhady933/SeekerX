@@ -472,7 +472,7 @@ function checkForVulns {
       touch $outputdir/$projectname/$1/.progress/.dependency_confusion
     fi
 #----------------------------------- Shodan IPs -----------------------------------------------#
-  if [ -x "$(command -v uncover)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.uncover ] && ! [ $SHODAN_API_KEY =="" ]
+  if [ -x "$(command -v uncover)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.uncover ] &&  [ "$SHODAN_API_KEY" != "" ]
   then
     echo -e "${GREEN}[+] Start Shodan Scanning ${NC}"
     echo "ssl:$1" | uncover -e shodan >> $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt
