@@ -551,7 +551,7 @@ then
   current_dir=$(pwd)
   cd $SEEKERX_HOME/tools/joomscan
   perl joomscan.pl -m $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt -ec
-  if [ -d "./reports"]
+  if [ -d "./reports" ]
   then
   mkdir $outputdir/$projectname/$1/vuln/joomla
   #edit done
