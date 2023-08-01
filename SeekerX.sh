@@ -450,7 +450,7 @@ function checkForVulns {
     then
       printf "\n${GREEN}[+]  Try to find package.json ${NC}\n";
       
-      cat $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt | httpx -silent -path /package.json -mc 200 -o $outputdir/$projectname/$1/recon/endpoints/dependency_paths.txt
+      cat $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt | httpx -silent -path /package.json -mc 200 -ms dependencies -o $outputdir/$projectname/$1/recon/endpoints/dependency_paths.txt
       touch $outputdir/$projectname/$1/.progress/.dependency_paths
     fi
 
