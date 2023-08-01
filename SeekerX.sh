@@ -567,7 +567,7 @@ then
   echo -e "${GREEN}[+] Start Collect AEM adobe Subdomains ${NC}"
   mkdir $outputdir/$projectname/$1/recon/AEM
   python3 $SEEKERX_HOME/tools/aem-hacker/aem_discoverer.py --file $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt >> $outputdir/$projectname/$1/recon/AEM/aem_subdomains.txt
- touch $outputdir/$projectname/$1/.progress/.joomla_detect
+ touch $outputdir/$projectname/$1/.progress/.aem_detect
  fi
 #-----------------------------------AEM scan-----------------------------------------------#
 
