@@ -555,7 +555,7 @@ then
   then
   mkdir $outputdir/$projectname/$1/vuln/joomla
   #edit done
-  mv ./reports/*.$1/*.txt $outputdir/$projectname/$1/vuln/joomla
+  mv ./reports/*$1/*.txt $outputdir/$projectname/$1/vuln/joomla
   fi
   cd $current_dir
   touch $outputdir/$projectname/$1/.progress/.joomla_scan
