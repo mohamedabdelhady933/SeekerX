@@ -497,7 +497,7 @@ fi
   then
   echo -e "${GREEN}[+] Start Collect Wordpress Subdomains ${NC}"
     mkdir $outputdir/$projectname/$1/recon/wordpress
-    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "wordpress-detect" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt  
+    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep -iE "(\[wordpress|wordpress-detect)" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt  
     touch $outputdir/$projectname/$1/.progress/.wordpress_detect
     fi
 #----------------------------------- Scan Wordpress -----------------------------------------------#
