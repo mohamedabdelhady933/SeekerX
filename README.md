@@ -78,9 +78,12 @@ Set SHODAN_API_KEY=""
 * 2- Just Check the following paths if they are right.
 
 ```
-HOOK_HOME="/home/$USER/SeekerX/tools/hoOk"
+HOOK_HOME="$HOME/SeekerX/tools/hoOk"
+
+Set HOOK_API_KEY=""
+
 SECLISTS="/usr/share/seclists"
-Nuclei_Templates_Path="~/nuclei-templates"
+Nuclei_Templates_Path="$HOME/nuclei-templates"
 ```
 
 * 3- Add Wordpress API key  (optional)
@@ -116,7 +119,7 @@ Options:
 Run 
 
 ```
-SeekerX.sh -p projectname -d domainfilepath [-o outputdir] [-m mode] [-c] [-h]
+./SeekerX.sh -p projectname -d domainfilepath [-o outputdir] [-m mode] [-c] [-h]
 
 ```
 
@@ -126,19 +129,19 @@ SeekerX.sh -p projectname -d domainfilepath [-o outputdir] [-m mode] [-c] [-h]
 To scan a project named "example" using a domain file "domains.txt" and store the output in the current directory, run the following command:
 
 ```
-./SeekerX.sh -p example -d domains.txt
+./SeekerX.sh -p example -d domain.txt
 ```
 
 You can also specify an output directory using the -o option:
 
 ```
-./SeekerX.sh -p example -d domains.txt -o /path/to/output/dir
+./SeekerX.sh -p example -d domain.txt -o /path/to/output/dir
 ```
 
 To run a deep scan mode, use the -m option:
 
 ```
-./SeekerX.sh -p example -d domains.txt -m deep
+./SeekerX.sh -p example -d domain.txt -m deep
 ```
 
 To check if the required tools are installed, use the -c option:
