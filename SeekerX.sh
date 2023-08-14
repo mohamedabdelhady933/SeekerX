@@ -476,6 +476,7 @@ function checkForVulns {
   if [ -x "$(command -v uncover)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.uncover ] &&  [ "$SHODAN_API_KEY" != "" ]
   then
     echo -e "${GREEN}[+] Start Shodan Scanning ${NC}"
+    export SHODAN_API_KEY=$SHODAN_API_KEY
     echo "ssl:$1" | uncover -e shodan >> $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt
     touch $outputdir/$projectname/$1/.progress/.uncover
 
