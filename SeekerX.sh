@@ -364,7 +364,7 @@ function endpointsFuzzing {
  mkdir -p $outputdir/$projectname/$1/recon/endpoints/param_fuzzing
 cat $outputdir/$projectname/$1/recon/endpoints/*.txt | sort -u | grep "?" > $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/static_params.txt
 
-if [ -x "$(command -v gospider)" ] && ! [ -f $outputdir/$projectname/$1/recon/subdomains/all_subs.txt ]
+if [ -x "$(command -v gospider)" ] &&  [ -f $outputdir/$projectname/$1/recon/subdomains/all_subs.txt ]
     then       
       gospider -S $outputdir/$projectname/$1/recon/subdomains/all_subs.txt | grep $1 | grep "?" >> $outputdir/$projectname/$1/recon/endpoints/param_fuzzing/gospider_params.txt
     fi
