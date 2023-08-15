@@ -526,7 +526,7 @@ then
  fi
 #-----------------------------------drupal scan-----------------------------------------------#
 
-if [ -f  $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_scan ] && [  -s "$outputdir/$projectname/$1/vuln/nuclei.txt" ]
+if [ -s  $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_scan ] && [  -s "$outputdir/$projectname/$1/vuln/nuclei.txt" ]
 then
   echo -e "${GREEN}[+] Scanning drupal Subdomains ${NC}"
   current_dir=$(pwd)
