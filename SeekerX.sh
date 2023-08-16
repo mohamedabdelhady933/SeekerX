@@ -345,13 +345,13 @@ function endpointsFuzzing {
   if [ -x "$(command -v python3)" ] &&  [ -f $SEEKERX_HOME/tools/JS-Leaks.py ] &&  [ -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.js_leak ]
  then
     echo -e "${GREEN}[+] Start Search in Javascript files ${NC}"
-    python3 $SEEKERX_HOME/tools/JS-Leaks.py -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt -o $outputdir/$projectname/$1/vuln/ -d $1
-    mv $outputdir/$projectname/$1/vuln/js_endpoinnts.txt $outputdir/$projectname/$1/recon/endpoints/
-    if [ -x "$(command -v httpx)" ] && [ -f $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt ]
-    then
-      cat $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt | httpx -silent  -mc 200 -o $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts_live.txt
-      rm $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt
-    fi
+    python3 $SEEKERX_HOME/tools/JS-Leaks.py -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt -o $outputdir/$projectname/$1/vuln/ 
+    # mv $outputdir/$projectname/$1/vuln/js_endpoinnts.txt $outputdir/$projectname/$1/recon/endpoints/
+    #  if [ -x "$(command -v httpx)" ] && [ -f $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt ]
+    # then
+    #   cat $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt | httpx -silent  -mc 200 -o $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts_live.txt
+    #   rm $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt
+    # fi
     touch $outputdir/$projectname/$1/.progress/.js_leak
   fi
   
@@ -521,7 +521,7 @@ if [ -s $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$proje
 then
   echo -e "${GREEN}[+] Start Collect Drupal Subdomains ${NC}"
   mkdir $outputdir/$projectname/$1/recon/drupal
-    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "drupal-detect"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt  
+    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep -iE "(\[drupal|drupal-detect)"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/drupal/drupal-subdomains.txt  
  touch $outputdir/$projectname/$1/.progress/.drupal_detect
  fi
 #-----------------------------------drupal scan-----------------------------------------------#
@@ -541,12 +541,12 @@ if [ -s $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$proje
 then
   echo -e "${GREEN}[+] Start Collect Joomla Subdomains ${NC}"
   mkdir $outputdir/$projectname/$1/recon/joomla
-  cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep | grep "\[*joomla*\]"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt  
+  cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep | grep -iE "(\[joomla|joomla-detect)"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt  
  touch $outputdir/$projectname/$1/.progress/.joomla_detect
  fi
 #-----------------------------------joomla scan-----------------------------------------------#
 
-if [ -f  $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.joomla_scan ] && [ -f $SEEKERX_HOME/tools/joomscan/joomscan.pl ]  && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_scan ]
+if [ -s  $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt ]  && ! [ -f $outputdir/$projectname/$1/.progress/.joomla_scan ] && [ -f $SEEKERX_HOME/tools/joomscan/joomscan.pl ]  
 then
   echo -e "${GREEN}[+] Scanning Joomla Subdomains ${NC}"
   current_dir=$(pwd)
@@ -563,7 +563,7 @@ then
 fi
 #-----------------------------------AEM Detect-----------------------------------------------#
 
-if  [ -f $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.aem_detect ] && [ -f $SEEKERX_HOME/tools/aem-hacker/aem_discoverer.py ]
+if  [ -s $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.aem_detect ] && [ -f $SEEKERX_HOME/tools/aem-hacker/aem_discoverer.py ]
 then
   echo -e "${GREEN}[+] Start Collect AEM adobe Subdomains ${NC}"
   mkdir $outputdir/$projectname/$1/recon/AEM
@@ -589,12 +589,12 @@ then
 fi
 #-----------------------------------Cpanel Detect-----------------------------------------------#
 
-if [ -s $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.Cpanel_detect ]  && ! [ -f $outputdir/$projectname/$1/.progress/.drupal_scan ]
+if [ -s $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.Cpanel_detect ]  
 then
   echo -e "${GREEN}[+] Collect Cpanel Subdomains ${NC}"
   
   mkdir $outputdir/$projectname/$1/recon/Cpanel
-    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "drupal-detect" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/Cpanel/Cpanel-subdomains.txt  
+    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep -iE "(\[drupal|drupal-detect)" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/Cpanel/Cpanel-subdomains.txt  
  touch $outputdir/$projectname/$1/.progress/.Cpanel_detect
  fi
  #-----------------------------------Cpanel scan-----------------------------------------------#
@@ -610,7 +610,7 @@ if [ -s $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$proje
 then
   echo -e "${GREEN}[+] Collect Jira Subdomains ${NC}"
   mkdir $outputdir/$projectname/$1/recon/Jira
-  cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "jira-detect" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/Jira/Jira-subdomains.txt
+  cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep -iE "(\[jira|jira-detect)" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/Jira/Jira-subdomains.txt
   touch $outputdir/$projectname/$1/.progress/.Jira_detect
 fi
 
@@ -634,7 +634,7 @@ if [ -s $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$proje
 then
   echo -e "${GREEN}[+] Collect Grafana Subdomains ${NC}"
   mkdir $outputdir/$projectname/$1/recon/Grafana
-  cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep "grafana-detect" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/Grafana/Grafana-subdomains.txt
+  cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep -iE "(\[grafana|grafana-detect)" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/Grafana/Grafana-subdomains.txt
   touch $outputdir/$projectname/$1/.progress/.Grafana_detect
 fi
 
