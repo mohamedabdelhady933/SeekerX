@@ -45,6 +45,23 @@ else
  	mv SecLists /usr/share/seclists
 fi
 
+#gitdorks_go
+
+if  [ -x "$(command -v gitdorks_go)" ]
+then
+	if [ -d gitdorks_go ]
+ 	then
+		echo "[+] gitdorks_go already installed";
+  	else
+   		git clone https://github.com/damit5/gitdorks_go.git
+     	fi
+else 
+	git clone https://github.com/damit5/gitdorks_go.git
+	go install -v github.com/damit5/gitdorks_go@latest
+	cp /root/go/bin/gitdorks_go /usr/local/bin/
+fi
+
+
 
 	# # ParamSpider
 	# git clone https://github.com/devanshbatham/ParamSpider
@@ -213,21 +230,7 @@ else
 	cp /root/go/bin/kxss /usr/local/bin/
 fi
 
-#gitdorks_go
 
-if  [ -x "$(command -v gitdorks_go)" ]
-then
-	if [ -d gitdorks_go ]
- 	then
-		echo "[+] gitdorks_go already installed";
-  	else
-   		git clone https://github.com/damit5/gitdorks_go.git
-     	fi
-else 
-	git clone https://github.com/damit5/gitdorks_go.git
-	go install -v github.com/damit5/gitdorks_go@latest
-	cp /root/go/bin/gitdorks_go /usr/local/bin/
-fi
 
 #dirsearch
 
