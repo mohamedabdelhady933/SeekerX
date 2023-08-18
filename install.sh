@@ -217,7 +217,12 @@ fi
 
 if  [ -x "$(command -v gitdorks_go)" ]
 then
-	echo "[+] gitdorks_go already installed";
+	if [ -d gitdorks_go ]
+ 	then
+		echo "[+] gitdorks_go already installed";
+  	else
+   		git clone https://github.com/damit5/gitdorks_go.git
+     	fi
 else 
 	git clone https://github.com/damit5/gitdorks_go.git
 	go install -v github.com/damit5/gitdorks_go@latest
