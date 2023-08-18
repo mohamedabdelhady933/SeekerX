@@ -23,7 +23,6 @@ pattern = re.compile(r"""
     (?:password|passwd|pass)\s*[:=]\s*(?P<password>['"\w]+)           # password
     |api\w*\s*[:=]\s*(?P<api_key>['"\w]+)                                # API key
     |aws(.{0,50})?(?P<aws_key_id>AKIA\w{16})                              # AWS access key ID
-    |aws(.{0,50})?(?P<aws_secret_key>[A-Za-z0-9/+=]{40})                 # AWS secret access key
     |['"]?(?P<secret_key>[A-Za-z0-9]{32,})['"]?                            # secret key
     |(?P<oauth_key>oauth[_-]?(?:token|key))\s*[:=]\s*(?P<oauth_token>['"\w]+)  # OAuth token/key
     |(?:(?:(?:access|api)[_-]?)?token|jwt)\s*[:=]\s*(?P<token>['"\w]+\.[\w+=/]+\.[\w+=/]+)   # token/JWT
@@ -50,15 +49,15 @@ with open(args.file, "r") as f:
         filename = os.path.join(args.output, "js_files", os.path.basename(url))
         # Download the file and save it to disk
         response = requests.get(url)
-        content = response.content
+        content = response.content.decode('utf-8')  # Decode bytes to string
         beautified = (jsbeautifier.beautify(content)).split("\n")
         for line in beautified:
             if pattern.search(line):
                 if filename not in results:
                     results[filename] = []
                 results[filename].append(line)
-        with open(filename, "wb") as f:
-            f.write('\n'.join(beautified).encode())
+        with open(filename, "w") as f:  # Open in text mode (w) instead of binary (wb)
+            f.write('\n'.join(beautified))
             
 # Write results to JSON file
 with open(os.path.join(args.output, "results.json"), "w") as f:
