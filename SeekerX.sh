@@ -242,6 +242,28 @@ function subdomainsScan {
     fi
     touch $outputdir/$projectname/$1/.progress/.subfinder
   fi
+
+  # -----------------------------Collect Subdomains of Subdomains------------------------------------------------------------
+if [ -x "$(command -v subfinder)" ] 
+then
+	echo -e "\n${GREEN}[+] Subfinder Collecting Subdomains of Subdomains on $1${NC}\n"
+	subfinder -silent -dL $outputdir/$projectname/$1/recon/subdomains/*.txt -o $outputdir/$projectname/$1/recon/subdomains/subs_of_subs_subfinder.txt
+ 	
+fi
+
+Need to edit
+# if [ -x "$(command -v ffuf)" ] 
+# then
+# 	echo -e "\n${GREEN}[+] FFUF Collecting Subdomains of Subdomains on $1${NC}\n"
+#  	for i in $(cat $outputdir/$projectname/$1/recon/subdomains/*.txt)
+#   	do
+#    		ffuf -u https://FUZZ.$i -w  $SECLISTS/Discovery/Web-Content/raft-small-directories.txt >> $outputdir/$projectname/$1/recon/subdomains/subs_of_subs_ffuf_tmp.txt
+#  		cat $outputdir/$projectname/$1/recon/subdomains/subs_of_subs_ffuf_tmp.txt | grep  "FUZZ" | cut -d ' ' -f7 | sort -u 
+# fi
+
+
+
+  
   clear
   banner
   endpointsScan $1
