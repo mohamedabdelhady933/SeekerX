@@ -559,7 +559,7 @@ if [ -s $outputdir/$projectname/$1/vuln/nuclei.txt ] && ! [ -f $outputdir/$proje
 then
   echo -e "${GREEN}[+] Start Collect Joomla Subdomains ${NC}"
   mkdir $outputdir/$projectname/$1/recon/joomla
-  cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep | grep -iE "(\[joomla|joomla-detect)"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt  
+  cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep -iE "(\[joomla|joomla-detect)"| cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/joomla/joomla-subdomains.txt  
  touch $outputdir/$projectname/$1/.progress/.joomla_detect
  fi
 #-----------------------------------joomla scan-----------------------------------------------#
