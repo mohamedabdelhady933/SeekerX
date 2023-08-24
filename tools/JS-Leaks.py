@@ -20,7 +20,6 @@ if not os.path.exists(os.path.join(args.output, "js_files")):
 
 # Define the regex pattern to check for
 pattern = re.compile(r"""
-    # (?:password|passwd|pass)\s*[:=]\s*(?P<password>['"\w]+)  # password
     api\w*\s*[:=]\s*(?P<api_key>['"\w]+)                      # API key
     |aws.*?(?P<aws_key_id>AKIA\w{16})                          # AWS access key ID
     |['"]?(?P<secret_key>[A-Za-z0-9]{32,})['"]?                # secret key
