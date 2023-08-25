@@ -598,9 +598,11 @@ then
       BURPCOLLAP_OR_ANY_IP_YOU_CONTROL="dummy.domain"
     fi
   mkdir $outputdir/$projectname/$1/vuln/aem 
+  counter=1;
   for url in $(cat $outputdir/$projectname/$1/recon/AEM/aem_subdomains.txt);
     do
-    python3 $SEEKERX_HOME/tools/aem-hacker/aem_hacker.py -u $url --host $BURPCOLLAP_OR_ANY_IP_YOU_CONTROL >>  $outputdir/$projectname/$1/vuln/aem/$url
+    ((counter++))
+    python3 $SEEKERX_HOME/tools/aem-hacker/aem_hacker.py -u $url --host $BURPCOLLAP_OR_ANY_IP_YOU_CONTROL >>  $outputdir/$projectname/$1/vuln/aem/$counter
     done
 
   touch $outputdir/$projectname/$1/.progress/.aem_scan
