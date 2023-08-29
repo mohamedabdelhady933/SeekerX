@@ -52,7 +52,7 @@ with open(args.file, "r") as f:
         # Get the filename from the URL
         filename = os.path.join(args.output, "js_files", os.path.basename(url))
         # Download the file and save it to disk
-        response = requests.get(url)
+        response = requests.get(url, verify=False)
         content = response.content.decode('utf-8')  # Decode bytes to string
         beautified = (jsbeautifier.beautify(content)).split("\n")
         for line in beautified:
