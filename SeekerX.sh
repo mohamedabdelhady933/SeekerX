@@ -348,7 +348,7 @@ function endpointsFuzzing {
  if [ -f "$outputdir/$projectname/$1/recon/endpoints/gau.txt" ]
  then
     
-    echo -e "${GREEN}[+] Start Collect Javascript files${NC}"
+    echo -e "\n${GREEN}[+] Start Collect Javascript files${NC}\n"
     mkdir -p $outputdir/$projectname/$1/recon/endpoints/js
     # if get an error edit it to cat $outputdir/$projectname/$1/recon/endpoints/*.txt
     cat $outputdir/$projectname/$1/recon/endpoints/*.txt | grep "\.js$"| cut -d '?' -f 1 >> $outputdir/$projectname/$1/recon/endpoints/js/endpoints_js.txt
@@ -366,7 +366,7 @@ function endpointsFuzzing {
   
   if [ -x "$(command -v python3)" ] &&  [ -f $SEEKERX_HOME/tools/JS-Leaks.py ] &&  [ -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.js_leak ]
  then
-    echo -e "${GREEN}[+] Start Search in Javascript files ${NC}"
+    echo -e "\n${GREEN}[+] Start Search in Javascript files ${NC}\n"
     python3 $SEEKERX_HOME/tools/JS-Leaks.py -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt -o $outputdir/$projectname/$1/vuln/ 
     # mv $outputdir/$projectname/$1/vuln/js_endpoinnts.txt $outputdir/$projectname/$1/recon/endpoints/
     #  if [ -x "$(command -v httpx)" ] && [ -f $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt ]
