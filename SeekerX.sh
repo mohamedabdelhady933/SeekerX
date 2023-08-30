@@ -251,7 +251,7 @@ then
  	
 fi
 
-Need to edit
+#Need to edit
 # if [ -x "$(command -v ffuf)" ] 
 # then
 # 	echo -e "\n${GREEN}[+] FFUF Collecting Subdomains of Subdomains on $1${NC}\n"
