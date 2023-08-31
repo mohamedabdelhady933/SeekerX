@@ -31,6 +31,7 @@ cases={
     "/wp-config.php.backup",
     "/wp-config.php.orig",
     "/wp-config.php_orig",
+    "/ws-config.json",
     "/wp-config.php.original",
     "/_wpeprivate/config.json"
 }
@@ -38,8 +39,8 @@ cases={
 
 
 def check_wordpress(url, api_key=None):
-    print(Fore.GREEN, "\n [+] Starting Check Wordpress")
-    print(Fore.GREEN, "\n [+] Check Config file")
+    print(Fore.GREEN, "\n [+] Starting Check Wordpress For : {}".format(url))
+    print(Fore.GREEN, "\n [+] Check Config file For : {} ".format(url))
     counter = 0
     for i in cases:
         URL = url + i
@@ -49,18 +50,18 @@ def check_wordpress(url, api_key=None):
             counter += 1
     if(counter == 0):
         print(Fore.RED, "\n [-] No Result Found")
-    print(Fore.GREEN, "\n [+] Starting Scan Wordpress")
+    print(Fore.GREEN, "\n [+] Starting Scan Wordpress For : {} ".format(url))
     if api_key:
         os.system("wpscan --url {} -e --random-user-agent --no-update --api-token {} ".format(url, api_key))
     else:
         os.system("wpscan --url {} -e --random-user-agent --no-update ".format(url))
 
-    print(Fore.GREEN, "\n [+] Starting check registration enabled")
+    print(Fore.GREEN, "\n [+] Starting check registration enabled For : {}".format(url))
     res = requests.get(url + "/wp-register.php", allow_redirects=False)
     if ("User registration is currently not allowed" in res.text) or (res.status_code == 302) or (res.status_code == 404) or (res.status_code == 301) or (res.status_code != 200):
-        print(Fore.RED, "\n [-] Registration Not Enabled")
+        print(Fore.RED, "\n [-] Registration Not Enabled For : {}".format(url))
     else:
-        print(Fore.GREEN, "\n [+] Registration Enabled")
+        print(Fore.GREEN, "\n [+] Registration Enabled For : {}".format(url))
 
 
 if __name__ == "__main__":
