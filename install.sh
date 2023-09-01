@@ -11,11 +11,11 @@ cd tools
 	chmod +x hoOk/hoOk.py
  	echo HOOK_HOME="$(pwd)/hoOk" >> ../config.conf
 
-# DepFine
-	git clone https://github.com/M359AH/DepFine.git
-	cd DepFine/
- 	pip3 install -r requirements.txt
-  	cd ..
+# # DepFine
+# 	git clone https://github.com/M359AH/DepFine.git
+# 	cd DepFine/
+#  	pip3 install -r requirements.txt
+#   	cd ..
   
   # joomla
   git clone https://github.com/OWASP/joomscan.git
@@ -187,14 +187,14 @@ else
 fi
 
 
-#confused
-# if  [ -x "$(command -v confused)" ]
-# then
+confused
+if  [ -x "$(command -v confused)" ]
+then
 
-# else 
-# 	go install -v github.com/visma-prodsec/confused@latest
-# 	cp /root/go/bin/confused /usr/local/bin/
-# fi
+else 
+	go install -v github.com/visma-prodsec/confused@latest
+	cp /root/go/bin/confused /usr/local/bin/
+fi
 
 
 # nuclei
