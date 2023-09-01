@@ -102,11 +102,18 @@ function checkForTools {
       echo -e "${RED}[-] Download it with 'go install github.com/projectdiscovery/httpx/cmd/httpx@latest'${NC}\n"
     fi
 
-  if ! [ -f $SEEKERX_HOME/tools/DepFine/DepFine.py ]
-    then 
-      echo -e "\n${RED}[-]---------- DepFine not found ----------[-]${NC}"
-      echo -e "${RED}[-] Download it with 'git clone https://github.com/M359AH/DepFine.git '${NC}\n"
-    fi
+  # if ! [ -f $SEEKERX_HOME/tools/DepFine/DepFine.py ]
+  #   then 
+  #     echo -e "\n${RED}[-]---------- DepFine not found ----------[-]${NC}"
+  #     echo -e "${RED}[-] Download it with 'git clone https://github.com/M359AH/DepFine.git '${NC}\n"
+  #   fi
+
+    if ! [ -x "$(command -v confused)" ]
+  then
+    echo -e "\n${RED}[-]---------- confused not found ----------[-]${NC}"
+    echo -e "${RED}[-] Download it with 'go install -v github.com/visma-prodsec/confused@latest'${NC}\n"
+  fi
+  
 
   if ! [ -x "$(command -v nuclei)" ]
   then
@@ -474,20 +481,20 @@ function checkForVulns {
 
 #-----------------------------------Check Dependency Confusion-------------------------------------------------------#
 
-  if [ -s $outputdir/$projectname/$1/vuln/dependency_paths.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.dependency_confusion ]
+  if [ -s $outputdir/$projectname/$1/vuln/dependency_paths.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.dependency_confusion ] && [ -x "$(command -v confused)" ]
     then
-      if [ -f $SEEKERX_HOME/tools/DepFine/DepFine.py ]
-        then
           mkdir $outputdir/$projectname/$1/vuln/dependency_confusion
-            printf "\n${GREEN}[+]  Try to Confusion Dependencies  from collected package.json files ${NC}\n";
-            dependency_paths=$(cat $outputdir/$projectname/$1/recon/endpoints/dependency_paths.txt);
-            counter=1;
+          printf "\n${GREEN}[+]  Try to Confusion Dependencies  from collected package.json files ${NC}\n\n";
+          dependency_paths=$(cat $outputdir/$projectname/$1/recon/endpoints/dependency_paths.txt);
+            counter=0;
             for i in $dependency_paths
               do
+	      	depDmain=$(echo $i |cut -d '/' -f 3);
                 (( counter++ ));
-                python3 $SEEKERX_HOME/tools/DepFine/DepFine.py $i >> $outputdir/$projectname/$1/vuln/dependency_confusion/$counter.txt ;
+		wget $i -q -O $counter.json ;
+                confused $counter.json >> $depDmain.txt ;
+        	rm $counter.json;
               done
-        fi
       touch $outputdir/$projectname/$1/.progress/.dependency_confusion
     fi
 #----------------------------------- Shodan IPs -----------------------------------------------#
