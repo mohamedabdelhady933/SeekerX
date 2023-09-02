@@ -28,7 +28,6 @@ pattern = re.compile(r"""
     |(?:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9|Bearer)\.[\w-]+\.[\w-]+(?:\.[\w+/_-]{0,2})?
     |['"]?(?P<secret_key>[A-Za-z0-9]{32,})['"]?   # secret key
     |(?P<oauth_key>oauth[_-]?(?:token|key))\s*[:=]\s*(?P<oauth_token>['"\w]+) )  # OAuth token/key
-    |(?:(?:(?:access|api)[_-]?)?token|jwt)\s*[:=]\s*(?P<token>['"\w]+\.[\w+=/]+\.[\w+=/]+)    # token/JWT
     """, re.IGNORECASE | re.VERBOSE)
 '''
 Check those
