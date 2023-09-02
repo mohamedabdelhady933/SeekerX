@@ -27,11 +27,12 @@ pattern = re.compile(r"""
     |aws.*?(?P<aws_key_id>AKIA\w{16})                           # AWS access key ID
     |(?:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9|Bearer)\.[\w-]+\.[\w-]+(?:\.[\w+/_-]{0,2})?
     |['"]?(?P<secret_key>[A-Za-z0-9]{32,})['"]?   # secret key
+    |(?P<oauth_key>oauth[_-]?(?:token|key))\s*[:=]\s*(?P<oauth_token>['"\w]+) )  # OAuth token/key
+    |(?:(?:(?:access|api)[_-]?)?token|jwt)\s*[:=]\s*(?P<token>['"\w]+\.[\w+=/]+\.[\w+=/]+)    # token/JWT
     """, re.IGNORECASE | re.VERBOSE)
 '''
 Check those
-    |(?P<oauth_key>oauth[_-]?(?:token|key))\s*[:=]\s*(?P<oauth_token>['"\w]+)  # OAuth token/key
-    |(?:(?:(?:access|api)[_-]?)?token|jwt)\s*[:=]\s*(?P<token>['"\w]+\.[\w+=/]+\.[\w+=/]+)   # token/JWT
+   
     |(?:(?:(?:access|api)[_-]?)?(?:secret[_-]?)?key|s3[_-]?key)\s*[:=]\s*(?P<aws_secret_key>[A-Za-z0-9/+=]+)    # AWS secret key
     |client[_-]?secret\s*[:=]\s*(?P<client_secret>['"\w]+)   # client secret
     
