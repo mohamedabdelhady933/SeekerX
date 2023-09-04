@@ -514,7 +514,7 @@ fi
   if [ -x "$(command -v nuclei)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.nuclei ]
     then
       printf "\n${GREEN}[+]  Nuclei Scanning ${NC}\n";
-      cat $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt | nuclei -silent -t $Nuclei_Templates_Path -o $outputdir/$projectname/$1/vuln/nuclei.txt
+      cat $outputdir/$projectname/$1/recon/subdomains/live_hosts.txt | nuclei -silent -etags ssl -et $Nuclei_Templates_Path/ssl/revoked-ssl-certificate.yaml -et $Nuclei_Templates_Path/ssl/untrusted-root-certificate.yaml -et $Nuclei_Templates_Path/ssl/weak-cipher-suites.yaml -et $Nuclei_Templates_Path/ssl/detect-ssl-issuer.yaml -et $Nuclei_Templates_Path/ssl/ssl-dns-names.yaml -et $Nuclei_Templates_Path/ssl/deprecated-tls.yaml -et $Nuclei_Templates_Path/ssl/expired-ssl.yaml -et $Nuclei_Templates_Path/ssl/kubernetes-fake-certificate.yaml -et $Nuclei_Templates_Path/ssl/self-signed-ssl.yaml -et $Nuclei_Templates_Path/ssl/ssl-dns-names.yaml -et $Nuclei_Templates_Path/ssl/mismatched-ssl-certificate.yaml -et $Nuclei_Templates_Path/http/misconfiguration/httponly-cookie-detect.yaml -et $Nuclei_Templates_Path/http/misconfiguration/xss-deprecated-header.yaml -et $Nuclei_Templates_Path/ssl/tls-version.yaml  -et $Nuclei_Templates_Path/dns/caa-fingerprint.yaml -et $Nuclei_Templates_Path/dns/cname-fingerprint.yaml -et $Nuclei_Templates_Path/dns/mx-fingerprint.yaml -et $Nuclei_Templates_Path/dns/nameserver-fingerprint.yaml -et $Nuclei_Templates_Path/dns/ptr-fingerprint.yaml -et $Nuclei_Templates_Path/dns/txt-fingerprint.yaml  -t $Nuclei_Templates_Path -o $outputdir/$projectname/$1/vuln/nuclei.txt
       touch $outputdir/$projectname/$1/.progress/.nuclei
     fi      
 
