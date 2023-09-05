@@ -3,6 +3,10 @@
 
 echo "SEEKERX_HOME="$(pwd) >> config.conf
 
+# For Tool requirements
+pip3 install -r requirements.txt
+
+
 # mkdir -p tools
 cd tools
 	# hoOk
