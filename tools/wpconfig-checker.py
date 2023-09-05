@@ -39,29 +39,35 @@ cases={
 
 
 def check_wordpress(url, api_key=None):
-    print(Fore.GREEN, "\n [+] Starting Check Wordpress For : {}".format(url))
-    print(Fore.GREEN, "\n [+] Check Config file For : {} ".format(url))
-    counter = 0
-    for i in cases:
-        URL = url + i
-        response = requests.get(URL)
-        if("define" in response.text ) and ( response.status_code != 403) and ( response.status_code != 404):
-            print(Fore.GREEN, "\n [+] The Following URL works : " + URL)
-            counter += 1
-    if(counter == 0):
-        print(Fore.RED, "\n [-] No Result Found")
+    if requests.get(url):
+        print(Fore.GREEN, "\n [+] Starting Check Wordpress For : {}".format(url))
+        print(Fore.GREEN, "\n [+] Check Config file For : {} ".format(url))
+        counter = 0
+        for i in cases:
+            URL = url + i
+            response = requests.get(URL)
+            if("define" in response.text ) and ( response.status_code != 403) and ( response.status_code != 404):
+                print(Fore.GREEN, "\n [+] The Following URL works : " + URL)
+                counter += 1
+        if(counter == 0):
+            print(Fore.RED, "\n [-] No Result Found")
+
+        print(Fore.GREEN, "\n [+] Starting check registration enabled For : {}".format(url))
+        res = requests.get(url + "/wp-register.php", allow_redirects=False)
+        if ("User registration is currently not allowed" in res.text) or (res.status_code == 302) or (res.status_code == 404) or (res.status_code == 301) or (res.status_code != 200):
+            print(Fore.RED, "\n [-] Registration Not Enabled For : {}".format(url))
+        else:
+            print(Fore.GREEN, "\n [+] Registration Enabled For : {}".format(url))
+        
+    else:
+        print(Fore.RED, "\n [-] Connection Failed for Host : {}".format(url))
     print(Fore.GREEN, "\n [+] Starting Scan Wordpress For : {} ".format(url))
     if api_key:
         os.system("wpscan --url {} -e --random-user-agent --no-update --api-token {} ".format(url, api_key))
     else:
         os.system("wpscan --url {} -e --random-user-agent --no-update ".format(url))
 
-    print(Fore.GREEN, "\n [+] Starting check registration enabled For : {}".format(url))
-    res = requests.get(url + "/wp-register.php", allow_redirects=False)
-    if ("User registration is currently not allowed" in res.text) or (res.status_code == 302) or (res.status_code == 404) or (res.status_code == 301) or (res.status_code != 200):
-        print(Fore.RED, "\n [-] Registration Not Enabled For : {}".format(url))
-    else:
-        print(Fore.GREEN, "\n [+] Registration Enabled For : {}".format(url))
+    
 
 
 if __name__ == "__main__":
