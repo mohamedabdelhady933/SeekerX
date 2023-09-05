@@ -63,7 +63,8 @@ def check_wordpress(url, api_key=None):
             print("-" * 50)
         
     else:
-        print(Fore.RED, "\n [-] Connection Failed for Host : {}".format(url))
+        print(Fore.RED, "\n [-] Connection Failed for enumerating config file for Host : {}".format(url))
+        print("-" * 50)
         
     print(Fore.GREEN, "\n [+] Starting Scan Wordpress For : {} ".format(url))
     if api_key:
