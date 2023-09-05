@@ -51,16 +51,20 @@ def check_wordpress(url, api_key=None):
                 counter += 1
         if(counter == 0):
             print(Fore.RED, "\n [-] No Result Found")
+            print("-" * 50)
 
         print(Fore.GREEN, "\n [+] Starting check registration enabled For : {}".format(url))
         res = requests.get(url + "/wp-register.php", allow_redirects=False)
         if ("User registration is currently not allowed" in res.text) or (res.status_code == 302) or (res.status_code == 404) or (res.status_code == 301) or (res.status_code != 200):
             print(Fore.RED, "\n [-] Registration Not Enabled For : {}".format(url))
+            print("-" * 50)
         else:
             print(Fore.GREEN, "\n [+] Registration Enabled For : {}".format(url))
+            print("-" * 50)
         
     else:
         print(Fore.RED, "\n [-] Connection Failed for Host : {}".format(url))
+        
     print(Fore.GREEN, "\n [+] Starting Scan Wordpress For : {} ".format(url))
     if api_key:
         os.system("wpscan --url {} -e --random-user-agent --no-update --api-token {} ".format(url, api_key))
