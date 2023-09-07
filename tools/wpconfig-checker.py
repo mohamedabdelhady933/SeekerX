@@ -190,9 +190,9 @@ def check_wordpress(url, api_key=None):
         
     print(Fore.GREEN, "\n [+] Starting Scan Wordpress For : {} ".format(url))
     if api_key:
-        os.system("wpscan --url {} -e --random-user-agent --no-update --api-token {} ".format(url, api_key))
+        os.system("wpscan --url {} -e --random-user-agent --ignore-main-redirect --no-update --api-token {} ".format(url, api_key))
     else:
-        os.system("wpscan --url {} -e --random-user-agent --no-update ".format(url))
+        os.system("wpscan --url {} -e --random-user-agent --ignore-main-redirect --no-update ".format(url))
 
     
 
