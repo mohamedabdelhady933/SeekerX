@@ -165,16 +165,19 @@ def check_wordpress(url, api_key=None):
         print(Fore.GREEN, "\n [+] Starting Check Wordpress For : {}".format(url))
         print(Fore.GREEN, "\n [+] Check Config file For : {} ".format(url))
         counter = 0
-        for i in cases:
-            URL = url + i
-            response = requests.get(URL)
-            if("define" in response.text ) and ( response.status_code != 403) and ( response.status_code != 404):
-                print(Fore.GREEN, "\n [+] The Following URL works : " + URL)
-                counter += 1
-        if(counter == 0):
-            print(Fore.RED, "\n [-] No Result Found")
-            print("-" * 50)
-
+        try:
+            for i in cases:
+                URL = url + i
+                
+                response = requests.get(URL)
+                if("define" in response.text ) and ( response.status_code != 403) and ( response.status_code != 404):
+                    print(Fore.GREEN, "\n [+] The Following URL works : " + URL)
+                    counter += 1
+            if(counter == 0):
+                print(Fore.RED, "\n [-] No Result Found")
+                print("-" * 50)
+        except:
+            print(Fore.RED, "\n [-] Failed To Enum Comfig File Due to Connection Failed with this Host "+ URL)
         print(Fore.GREEN, "\n [+] Starting check registration enabled For : {}".format(url))
         res = requests.get(url + "/wp-register.php", allow_redirects=False)
         if ("User registration is currently not allowed" in res.text) or (res.status_code == 302) or (res.status_code == 404) or (res.status_code == 301) or (res.status_code != 200):
