@@ -622,7 +622,7 @@ then
   echo -e "${GREEN}[+] Collect Cpanel Subdomains ${NC}"
   
   mkdir $outputdir/$projectname/$1/recon/Cpanel
-    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep -iE "(\[drupal|drupal-detect)" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/Cpanel/Cpanel-subdomains.txt  
+    cat $outputdir/$projectname/$1/vuln/nuclei.txt | grep -iE "(\[cpanel|cpanel-detect)" | cut -d " " -f4 | sort -u | cut -f1,2,3 -d "/" | sort | uniq >> $outputdir/$projectname/$1/recon/Cpanel/Cpanel-subdomains.txt  
  touch $outputdir/$projectname/$1/.progress/.Cpanel_detect
  fi
  #-----------------------------------Cpanel scan-----------------------------------------------#
