@@ -191,10 +191,10 @@ else
 fi
 
 
-confused
+
 if  [ -x "$(command -v confused)" ]
 then
-
+	echo "[+] Gf-Patterns already installed";
 else 
 	go install -v github.com/visma-prodsec/confused@latest
 	cp /root/go/bin/confused /usr/local/bin/
