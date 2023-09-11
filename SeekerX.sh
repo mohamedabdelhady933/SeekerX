@@ -445,6 +445,7 @@ fi
     echo -e "\n${GREEN}[+] Scan for Google Dorks ${NC}\n"
     mkdir -p $outputdir/$projectname/$1/recon/Dorks
     bash $SEEKERX_HOME/tools/Fast-Google-Dorks-Scan/FGDS.sh $1 >> $outputdir/$projectname/$1/recon/Dorks/google_dorks.txt
+    rm -fr $SEEKERX_HOME/outputs
     touch $outputdir/$projectname/$1/.progress/.google-dorks
   fi
 
