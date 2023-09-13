@@ -33,6 +33,7 @@ pattern = re.compile(r"""
     |['"]?(?P<apikey>[A-Za-z0-9_]{10,})['"]?\s*[:=]\s*['"]?(?P<apikey_value>[A-Za-z0-9_]+)['"]?   # generic API key
     |(?:(?:secret|private)[_-]?)?(?:key|token)\s*[:=]\s*(?P<secret_value>['"\w]+)   # generic secret key/token
     |(?:\b(?:access|api|auth|client|credential|db|key|oauth|pass|secret|token|pwd)[_\w]*\b.*?['"]?\s*[:=]\s*['"]?[\w+/=]{20,})  # other patterns
+    |(?:['"=\w]{4,}.*?(?:access|api|auth|client|credential|db|key|oauth|pass|secret|token|pwd)[_\w]*\b.*?['"]?\s*[:=]\s*['"]?[\w+/=]{20,})  # other patterns
 
     """, re.IGNORECASE | re.VERBOSE)
 '''
