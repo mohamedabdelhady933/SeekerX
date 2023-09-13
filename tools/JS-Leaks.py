@@ -32,14 +32,14 @@ pattern = re.compile(r"""
     |client[_-]?secret\s*[:=]\s*(?P<client_secret>['"\w]+)  # client token
     |['"]?(?P<apikey>[A-Za-z0-9_]{10,})['"]?\s*[:=]\s*['"]?(?P<apikey_value>[A-Za-z0-9_]+)['"]?   # generic API key
     |(?:(?:secret|private)[_-]?)?(?:key|token)\s*[:=]\s*(?P<secret_value>['"\w]+)   # generic secret key/token
+    |(?:\b(?:access|api|auth|client|credential|db|key|oauth|pass|secret|token|pwd)[_\w]*\b.*?['"]?\s*[:=]\s*['"]?[\w+/=]{20,})  # other patterns
+
     """, re.IGNORECASE | re.VERBOSE)
 '''
 Check those
    
     |(?i)(?:(?:(?:access|api)[_-]?)?(?:secret[_-]?)?key|s3[_-]?key)\s*[:=]\s*(?P<aws_secret_key>[A-Za-z0-9/+=]+)(?=\s|$) # AWS secret key
 
-    |(?:(?:secret|private)[_-]?)?(?:key|token)\s*[:=]\s*(?P<secret_value>['"\w]+)   # generic secret key/token
-    |(?:\b(?:access|api|auth|client|credential|db|key|oauth|pass|secret|token|pwd)[_\w]*\b.*?['"]?\s*[:=]\s*['"]?[\w+/=]{20,})  # other patterns
     |(?:['"=\w]{4,}.*?(?:access|api|auth|client|credential|db|key|oauth|pass|secret|token|pwd)[_\w]*\b.*?['"]?\s*[:=]\s*['"]?[\w+/=]{20,})  # other patterns
   
 '''
