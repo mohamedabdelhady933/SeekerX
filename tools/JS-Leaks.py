@@ -30,7 +30,7 @@ pattern = re.compile(r"""
     |(?:(?:(?:access|api)[_-]?)?token|jwt)\s*[:=]\s*(?P<token>['"\w]+\.[\w+=/]+\.[\w+=/]+)    # token/JWT
     |(?P<oauth_key>oauth[_-]?(?:token|key))\s*[:=]\s*(?P<oauth_token>['"\w]+)  # OAuth token/key
     |client[_-]?secret\s*[:=]\s*(?P<client_secret>['"\w]+)  # client token
-    |(?i)(?:(?:(?:access|api)[_-]?)?(?:secret[_-]?)?key|s3[_-]?key)\s*[:=]\s*(?P<aws_secret_key>[A-Za-z0-9/+=]+)(?=\s|$) 
+    |(?i)(?:(?:(?:access|api)[_-]?)?(?:secret[_-]?)?key|s3[_-]?key)\s*[:=]\s*(?P<aws_secret_key>[A-Za-z0-9/+=]+)(?=\s|$)
     |['"]?(?P<apikey>[A-Za-z0-9_]{10,})['"]?\s*[:=]\s*['"]?(?P<apikey_value>[A-Za-z0-9_]+)['"]?   # generic API key
     """, re.IGNORECASE | re.VERBOSE)
 '''
