@@ -29,12 +29,12 @@ pattern = re.compile(r"""
     |['"]?(?P<secret_key>[A-Za-z0-9]{32,})['"]?   # secret key
     |(?:(?:(?:access|api)[_-]?)?token|jwt)\s*[:=]\s*(?P<token>['"\w]+\.[\w+=/]+\.[\w+=/]+)    # token/JWT
     |(?P<oauth_key>oauth[_-]?(?:token|key))\s*[:=]\s*(?P<oauth_token>['"\w]+)  # OAuth token/key
+    |client[_-]?secret\s*[:=]\s*(?P<client_secret>['"\w]+)
     """, re.IGNORECASE | re.VERBOSE)
 '''
 Check those
    
     |(?:(?:(?:access|api)[_-]?)?(?:secret[_-]?)?key|s3[_-]?key)\s*[:=]\s*(?P<aws_secret_key>[A-Za-z0-9/+=]+)    # AWS secret key
-    |client[_-]?secret\s*[:=]\s*(?P<client_secret>['"\w]+)   # client secret
     
     |['"]?(?P<apikey>[A-Za-z0-9_]{10,})['"]?\s*[:=]\s*['"]?(?P<apikey_value>[A-Za-z0-9_]+)['"]?   # generic API key
     |(?:(?:secret|private)[_-]?)?(?:key|token)\s*[:=]\s*(?P<secret_value>['"\w]+)   # generic secret key/token
