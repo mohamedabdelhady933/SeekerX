@@ -1,8 +1,8 @@
 sys
-argparse
-jsbeautifier
 re
 json
+argparse
+jsbeautifier
 bs4
 requests
 censys
