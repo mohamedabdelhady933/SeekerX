@@ -1,4 +1,3 @@
-os
 sys
 argparse
 jsbeautifier
