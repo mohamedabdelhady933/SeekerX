@@ -361,23 +361,25 @@ function endpointsFuzzing {
     mkdir -p $outputdir/$projectname/$1/recon/endpoints/js
     # if get an error edit it to cat $outputdir/$projectname/$1/recon/endpoints/*.txt
     cat $outputdir/$projectname/$1/recon/endpoints/*.txt | grep "\.js$"| cut -d '?' -f 1 >> $outputdir/$projectname/$1/recon/endpoints/js/endpoints_js.txt
-    
-    if [ -x "$(command -v gospider)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.gospider ]
-    then       
-      gospider -s https://$1 | grep $1 | grep "\.js$" | cut -d '?' -f 1 | awk -F"http" '{print "http"$2}' >> $outputdir/$projectname/$1/recon/endpoints/js/gospider.txt
-      
-      touch $outputdir/$projectname/$1/.progress/.gospider
-    fi
+fi
 
-  cat $outputdir/$projectname/$1/recon/endpoints/js/* | sort -u | httpx -silent -mc 200  >> $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt
- fi
+if [ -x "$(command -v gospider)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.gospider ]
+then       
+ 	gospider -s https://$1 | grep $1 | grep "\.js$" | cut -d '?' -f 1 | awk -F"http" '{print "http"$2}' >> $outputdir/$projectname/$1/recon/endpoints/js/gospider.txt
+	touch $outputdir/$projectname/$1/.progress/.gospider
+fi
+
+cat $outputdir/$projectname/$1/recon/endpoints/js/* | sort -u | httpx -silent -mc 200  >> $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt
+
   #------------------------------------------ JS leaks Scan  ------------------------------------------------------
   
-  if [ -x "$(command -v python3)" ] &&  [ -f $SEEKERX_HOME/tools/JS-Leaks.py ] &&  [ -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.js_leak ]
+  if [ -x "$(command -v nipejs)" ] &&  [ -f $SEEKERX_HOME/tools/regex.txt ] &&  [ -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.js_leak ]
  then
     echo -e "\n${GREEN}[+] Start Search in Javascript files ${NC}\n"
     mkdir $outputdir/$projectname/$1/vuln/javascript/
-    python3 $SEEKERX_HOME/tools/JS-Leaks.py -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt -o $outputdir/$projectname/$1/vuln/javascript/ 2>/dev/null
+    cat $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt | nipejs -r $SEEKERX_HOME/tools/regex.txt >> $outputdir/$projectname/$1/vuln/javascript/javascript_leaks.txt
+    
+    # python3 $SEEKERX_HOME/tools/JS-Leaks.py -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt -o $outputdir/$projectname/$1/vuln/javascript/ 2>/dev/null
     # mv $outputdir/$projectname/$1/vuln/js_endpoinnts.txt $outputdir/$projectname/$1/recon/endpoints/
     #  if [ -x "$(command -v httpx)" ] && [ -f $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt ]
     # then
