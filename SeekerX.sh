@@ -532,7 +532,7 @@ fi
     fi
 #----------------------------------- Scan Wordpress -----------------------------------------------#
 
-  if [ -f $SEEKERX_HOME/tools/wpconfig-checker.py ] && [ -x "$(command -v wpscan)" ] && [ -x "$(command -v python)" ]  &&  [ -f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt ] && [ -s "$outputdir/$projectname/$1/vuln/nuclei.txt" ] && ! [ -f $outputdir/$projectname/$1/.progress/.wordpress_scan ]
+  if [ -f $SEEKERX_HOME/tools/wpconfig-checker.py ] && [ -x "$(command -v wpscan)" ] && [ -x "$(command -v python3)" ]  &&  [ -f $outputdir/$projectname/$1/recon/wordpress/wordpress-subdomains.txt ] && [ -s "$outputdir/$projectname/$1/vuln/nuclei.txt" ] && ! [ -f $outputdir/$projectname/$1/.progress/.wordpress_scan ]
   then
     echo -e "${GREEN}[+] Scanning Wordpress Subdomains ${NC}"
 
