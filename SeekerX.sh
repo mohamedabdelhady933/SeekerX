@@ -373,11 +373,12 @@ cat $outputdir/$projectname/$1/recon/endpoints/js/* | sort -u | httpx -silent -m
 
   #------------------------------------------ JS leaks Scan  ------------------------------------------------------
   
-  if [ -x "$(command -v nipejs)" ] &&  [ -f $SEEKERX_HOME/tools/regex.txt ] &&  [ -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.js_leak ]
- then
-    echo -e "\n${GREEN}[+] Start Search in Javascript files ${NC}\n"
-    mkdir $outputdir/$projectname/$1/vuln/javascript/
-    cat $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt | nipejs -r $SEEKERX_HOME/tools/regex.txt >> $outputdir/$projectname/$1/vuln/javascript/javascript_leaks.txt
+if [ -x "$(command -v nipejs)" ] &&  [ -f $SEEKERX_HOME/tools/regex.txt ] &&  [ -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.js_leak ]
+then
+    	echo -e "\n${GREEN}[+] Start Search in Javascript files ${NC}\n"
+    	mkdir $outputdir/$projectname/$1/vuln/javascript/
+     	touch $outputdir/$projectname/$1/vuln/javascript/javascript_leaks.txt
+   	cat $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt | nipejs -r $SEEKERX_HOME/tools/regex.txt >> $outputdir/$projectname/$1/vuln/javascript/javascript_leaks.txt
     
     # python3 $SEEKERX_HOME/tools/JS-Leaks.py -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt -o $outputdir/$projectname/$1/vuln/javascript/ 2>/dev/null
     # mv $outputdir/$projectname/$1/vuln/js_endpoinnts.txt $outputdir/$projectname/$1/recon/endpoints/
@@ -386,8 +387,8 @@ cat $outputdir/$projectname/$1/recon/endpoints/js/* | sort -u | httpx -silent -m
     #   cat $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt | httpx -silent  -mc 200 -o $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts_live.txt
     #   rm $outputdir/$projectname/$1/recon/endpoints/js_endpoinnts.txt
     # fi
-    touch $outputdir/$projectname/$1/.progress/.js_leak
-  fi
+    	touch $outputdir/$projectname/$1/.progress/.js_leak
+fi
   
   
  #------------------------------------------ Parameter scan ----------------------------------------------#
