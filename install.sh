@@ -25,6 +25,10 @@ cd tools
    			wget https://raw.githubusercontent.com/i5nipe/nipejs/master/files/regex.txt
 			
      		fi
+       	elif   [ -f /root/go/bin/nipejs ]
+	then
+ 		cp /root/go/bin/nipejs /usr/local/bin/
+   		wget https://raw.githubusercontent.com/i5nipe/nipejs/master/files/regex.txt
 	else 
 		go install github.com/i5nipe/nipejs@latest
   		wget https://raw.githubusercontent.com/i5nipe/nipejs/master/files/regex.txt
