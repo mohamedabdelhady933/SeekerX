@@ -455,7 +455,7 @@ fi
 
   #----------------------------------- Github Dorks-----------------------------------------------#
 
-  if [ -x "$(command gitdorks_go)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.git-dorks] && [ "$GITHUB_TOKENS" != ""]
+  if [ -x "$(command -v gitdorks_go)" ] && ! [ -f $outputdir/$projectname/$1/.progress/.git-dorks] && [ "$GITHUB_TOKENS" != ""]
   then
         echo -e "\n${GREEN}[+] Scan for Github Dorks ${NC}\n"
 	gitdorks_go -gd $SEEKERX_HOME/tools/gitdorks_go/Dorks/smalldorks.txt -nws 25 -target $1 -token $GITHUB_TOKENS -ew 5 >> $outputdir/$projectname/$1/recon/Dorks/git_dorks.txt
