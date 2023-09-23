@@ -15,29 +15,40 @@ cd tools
 	chmod +x hoOk/hoOk.py
  	echo HOOK_HOME="$(pwd)/hoOk" >> ../config.conf
 
-# # DepFine
-# 	git clone https://github.com/M359AH/DepFine.git
-# 	cd DepFine/
-#  	pip3 install -r requirements.txt
-#   	cd ..
+#  NipeJS
+	if  [ -x "$(command -v nipejs)" ]
+	then
+		if [ -f regex.txt ]
+ 		then
+			echo "[+] nipejs already installed";
+  		else
+   			wget https://raw.githubusercontent.com/i5nipe/nipejs/master/files/regex.txt
+			
+     		fi
+	else 
+		go install github.com/i5nipe/nipejs@latest
+  		wget https://raw.githubusercontent.com/i5nipe/nipejs/master/files/regex.txt
+	fi
+	 	
+	
   
   # joomla
-  git clone https://github.com/OWASP/joomscan.git
+ 	 git clone https://github.com/OWASP/joomscan.git
   
 
   #droopscan
-  git clone https://github.com/droope/droopescan.git
-  cd droopescan/
-  pip3 install -r requirements.txt 2>/dev/null
-  cd ..
+	  git clone https://github.com/droope/droopescan.git
+ 	 cd droopescan/
+ 	 pip3 install -r requirements.txt 2>/dev/null
+ 	 cd ..
   
   # aem
-  git clone https://github.com/0ang3el/aem-hacker.git
-  pip3 install -r aem-hacker/requirements.txt
+	  git clone https://github.com/0ang3el/aem-hacker.git
+ 	 pip3 install -r aem-hacker/requirements.txt
   
-
-git clone https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan.git
-chmod +x Fast-Google-Dorks-Scan/FGDS.sh
+# Google Dorks
+	git clone https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan.git
+	chmod +x Fast-Google-Dorks-Scan/FGDS.sh
 
 # Seclist
 
