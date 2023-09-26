@@ -376,7 +376,7 @@ cat $outputdir/$projectname/$1/recon/endpoints/js/* | sort -u | httpx -silent -m
 if [ -x "$(command -v nipejs)" ] &&  [ -f $SEEKERX_HOME/tools/regex.txt ] &&  [ -f $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt ] && ! [ -f $outputdir/$projectname/$1/.progress/.js_leak ]
 then
     	echo -e "\n${GREEN}[+] Start Search in Javascript files ${NC}\n"
-    	mkdir $outputdir/$projectname/$1/vuln/javascript/
+    	mkdir -p $outputdir/$projectname/$1/vuln/javascript/
      	touch $outputdir/$projectname/$1/vuln/javascript/javascript_leaks.txt
    	cat $outputdir/$projectname/$1/recon/endpoints/js/all_js.txt | nipejs -r $SEEKERX_HOME/tools/regex.txt >> $outputdir/$projectname/$1/vuln/javascript/javascript_leaks.txt
     
