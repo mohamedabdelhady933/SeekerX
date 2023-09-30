@@ -38,6 +38,17 @@ cd tools
   
   # joomla
  	 git clone https://github.com/OWASP/joomscan.git
+   
+   
+# aem
+	  git clone https://github.com/0ang3el/aem-hacker.git
+ 	 pip3 install -r aem-hacker/requirements.txt
+   
+  
+# Google Dorks
+	git clone https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan.git
+	chmod +x Fast-Google-Dorks-Scan/FGDS.sh
+
   
 
   #droopscan
@@ -46,13 +57,6 @@ cd tools
  	 pip3 install -r requirements.txt 2>/dev/null
  	 cd ..
   
-  # aem
-	  git clone https://github.com/0ang3el/aem-hacker.git
- 	 pip3 install -r aem-hacker/requirements.txt
-  
-# Google Dorks
-	git clone https://github.com/IvanGlinkin/Fast-Google-Dorks-Scan.git
-	chmod +x Fast-Google-Dorks-Scan/FGDS.sh
 
 # Seclist
 
