@@ -6,13 +6,14 @@ echo "SEEKERX_HOME="$(pwd) >> config.conf
 # For Tool requirements
 pip3 install -r requirements.txt
 
-
+source config.conf
 # mkdir -p tools
 cd tools
 	# hoOk
 	git clone https://github.com/mrxdevil404/hoOk.git
 	pip3 install -r hoOk/requirements.txt 
 	chmod +x hoOk/hoOk.py
+ 	echo $HOOK_API_KEY >> hoOk/whoisxmlapi.txt
  	echo HOOK_HOME="$(pwd)/hoOk" >> ../config.conf
 
 #  NipeJS
